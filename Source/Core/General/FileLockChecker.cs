@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Linq;
+using Mono.Unix;
 
 namespace CodeImp.DoomBuilder
 {
@@ -13,8 +15,14 @@ namespace CodeImp.DoomBuilder
 			public string Error;
 			public List<Process> Processes = new List<Process>();
 		}
-		
-		[StructLayout(LayoutKind.Sequential)]
+#if Linux
+        [DllImport("libc", EntryPoint = "makedev")]
+        private static extern uint GetDeviceID(uint major, uint minor);
+
+        private static readonly string UnixLocksFile = "/proc/locks";
+
+#elif Windows
+        [StructLayout(LayoutKind.Sequential)]
 		private struct RM_UNIQUE_PROCESS
 		{
 			public int dwProcessId;
@@ -75,37 +83,87 @@ namespace CodeImp.DoomBuilder
 									ref uint pnProcInfo,
 									[In, Out] RM_PROCESS_INFO[] rgAffectedApps,
 									ref uint lpdwRebootReasons);
+#endif
+        /// <summary>
+        /// Find out what process(es) have a lock on the specified file.
+        /// </summary>
+        /// <param name="path">Path of the file.</param>
+        /// <returns>Processes locking the file</returns>
+        /// <remarks>See also:
+        /// http://msdn.microsoft.com/en-us/library/windows/desktop/aa373661(v=vs.85).aspx
+        /// http://wyupdate.googlecode.com/svn-history/r401/trunk/frmFilesInUse.cs (no copyright in code at time of viewing)
+        /// 
+        /// </remarks>
+        public static FileLockCheckResult CheckFile(string path)
+        {
+#if Windows
+            //mxd. Do it the clunky way? (WinXP)
+            if (Environment.OSVersion.Version.Major < 6)
+                {
+                    return CheckFileWindowsXP(path);
+                }
+                return CheckFileWindows(path);
+#elif Linux
+            return CheckFileUnix(path);
+#endif
+        }
+#if Linux
+        private static FileLockCheckResult CheckFileUnix(string path)
+        {
+            FileLockCheckResult result = new FileLockCheckResult();
+            if (UnixFileSystemInfo.TryGetFileSystemEntry(path, out UnixFileSystemInfo finfo))
+            {
+                long wadInode = finfo.Inode;
+                string[] LockInfos = File.ReadAllLines(UnixLocksFile);
+                foreach (string LockLine in LockInfos)
+                {
+                    // Each line is in this format:
+                    //                           PID major:minor:inode
+                    // 1: POSIX  ADVISORY  READ  5433 08:01:7864448 128 128
+                    string[] LockInfo = LockLine.Split(new char[]{' ', '\t'});
+                    int pid = int.Parse(LockInfo[4]);
+                    long[] nodeInfo = (long[])LockInfo[5].Split(':').Select((n) => long.Parse(n));
+                    uint lockDevice = GetDeviceID((uint)nodeInfo[0], (uint)nodeInfo[1]);
+                    long lockInode = nodeInfo[2];
+                    if (lockInode == wadInode && lockDevice == finfo.Device)
+                    {
+                        // It's locked!
+                        result.Processes.Add(Process.GetProcessById(pid));
+                    }
+                }
+            }
+            if (result.Processes.Count > 0)
+            {
+                result.Error = "Unable to save the map: target file is locked by the following process"
+                                           + (result.Processes.Count > 1 ? "es" : "") + ":"
+                                           + Environment.NewLine + Environment.NewLine;
+                foreach (var proc in result.Processes)
+                {
+                    result.Error += $"{proc.ProcessName} ({proc.Id})" + Environment.NewLine;
+                }
+            }
+            return result;
+        }
+#elif Windows
+        private static FileLockCheckResult CheckFileWindowsXP(string path)
+        {
+            bool locked = false;
 
-		/// <summary>
-		/// Find out what process(es) have a lock on the specified file.
-		/// </summary>
-		/// <param name="path">Path of the file.</param>
-		/// <returns>Processes locking the file</returns>
-		/// <remarks>See also:
-		/// http://msdn.microsoft.com/en-us/library/windows/desktop/aa373661(v=vs.85).aspx
-		/// http://wyupdate.googlecode.com/svn-history/r401/trunk/frmFilesInUse.cs (no copyright in code at time of viewing)
-		/// 
-		/// </remarks>
-		static public FileLockCheckResult CheckFile(string path)
+            try
+            {
+                using (File.Open(path, FileMode.Open)) { }
+            }
+            catch (IOException e)
+            {
+                int errorcode = Marshal.GetHRForException(e) & ((1 << 16) - 1);
+                locked = (errorcode == 32 || errorcode == 33);
+            }
+
+            return new FileLockCheckResult { Error = (locked ? "Unable to save the map. Map file is locked by another process." : string.Empty) };
+        }
+
+        private static FileLockCheckResult CheckFileWindows(string path)
 		{
-			//mxd. Do it the clunky way? (WinXP)
-			if(Environment.OSVersion.Version.Major < 6)
-			{
-				bool locked = false;
-				
-				try
-				{
-					using(File.Open(path, FileMode.Open)) { }
-				}
-				catch(IOException e)
-				{
-					int errorcode = Marshal.GetHRForException(e) & ((1 << 16) - 1);
-					locked = (errorcode == 32 || errorcode == 33);
-				}
-
-				return new FileLockCheckResult { Error = (locked ? "Unable to save the map. Map file is locked by another process." : string.Empty) };
-			}
-
 			//mxd. Needs Vista or newer...
 			uint handle;
 			string key = Guid.NewGuid().ToString();
@@ -207,5 +265,6 @@ namespace CodeImp.DoomBuilder
 
 			return result;
 		}
+#endif
 	}
 }
