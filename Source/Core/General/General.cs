@@ -53,8 +53,8 @@ namespace CodeImp.DoomBuilder
 		[DllImport("devil.dll")]
 		private static extern void ilInit();
 
-		[DllImport("user32.dll")]
-		internal static extern bool LockWindowUpdate(IntPtr hwnd);
+		//[DllImport("user32.dll")]
+		//internal static extern bool LockWindowUpdate(IntPtr hwnd);
 
 		[DllImport("kernel32.dll", EntryPoint = "RtlZeroMemory", SetLastError = false)]
 		internal static extern void ZeroMemory(IntPtr dest, int size);

@@ -473,23 +473,31 @@ namespace CodeImp.DoomBuilder.Windows
 			
 			this.Update();
 		}
-		
-		#endregion
-		
-		#region ================== Window
-		
-		// This locks the window for updating
-		internal void LockUpdate()
+
+        #endregion
+
+        #region ================== Window
+
+        public override void Refresh()
+        {
+            if (lockupdatecount == 0)
+            {
+                base.Refresh();
+            }
+        }
+
+        // This locks the window for updating
+        internal void LockUpdate()
 		{
 			lockupdatecount++;
-			if(lockupdatecount == 1) General.LockWindowUpdate(this.Handle);
+			// if(lockupdatecount == 1) General.LockWindowUpdate(this.Handle);
 		}
 
 		// This unlocks for updating
 		internal void UnlockUpdate()
 		{
 			lockupdatecount--;
-			if(lockupdatecount == 0) General.LockWindowUpdate(IntPtr.Zero);
+            if (lockupdatecount == 0) Refresh(); // General.LockWindowUpdate(IntPtr.Zero);
 			if(lockupdatecount < 0) lockupdatecount = 0;
 		}
 
