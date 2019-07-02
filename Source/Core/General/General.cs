@@ -56,8 +56,19 @@ namespace CodeImp.DoomBuilder
 		//[DllImport("user32.dll")]
 		//internal static extern bool LockWindowUpdate(IntPtr hwnd);
 
-		[DllImport("kernel32.dll", EntryPoint = "RtlZeroMemory", SetLastError = false)]
-		internal static extern void ZeroMemory(IntPtr dest, int size);
+		//[DllImport("kernel32.dll", EntryPoint = "RtlZeroMemory", SetLastError = false)]
+		//internal static extern void ZeroMemory(IntPtr dest, int size);
+        internal static void ZeroMemory(IntPtr dest, int size)
+        {
+            unsafe
+            {
+                byte* Memory = (byte*)dest.ToPointer();
+                for(int i = 0; i < size; i++)
+                {
+                    Memory[i] = 0;
+                }
+            }
+        }
 
 		//[DllImport("kernel32.dll", EntryPoint = "RtlMoveMemory", SetLastError = false)]
 		//internal static extern unsafe void CopyMemory(void* dst, void* src, uint length);
