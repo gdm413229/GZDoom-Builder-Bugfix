@@ -17,6 +17,7 @@
 #region ================== Namespaces
 
 using System;
+using System.Media;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -1391,8 +1392,8 @@ namespace CodeImp.DoomBuilder.BuilderModes
 			}
 			else
 			{
-				General.Interface.MessageBeep(MessageBeepType.Default);
-				General.Interface.DisplayStatus(StatusType.Info, "A selection is required for this action.");
+                SystemSounds.Beep.Play();
+                General.Interface.DisplayStatus(StatusType.Info, "A selection is required for this action.");
 				
 				// Cancel now
 				General.Editing.CancelMode();

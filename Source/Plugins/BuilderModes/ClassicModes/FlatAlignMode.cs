@@ -17,6 +17,7 @@
 #region ================== Namespaces
 
 using System;
+using System.Media;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -600,8 +601,8 @@ namespace CodeImp.DoomBuilder.BuilderModes
 			selection = General.Map.Map.GetSelectedSectors(true);
 			if(selection.Count == 0)
 			{
-				General.Interface.MessageBeep(MessageBeepType.Default);
-				General.Interface.DisplayStatus(StatusType.Action, "A selected sector is required for this action.");
+                SystemSounds.Beep.Play();
+                General.Interface.DisplayStatus(StatusType.Action, "A selected sector is required for this action.");
 				General.Editing.CancelMode();
 				return;
 			}
@@ -612,8 +613,8 @@ namespace CodeImp.DoomBuilder.BuilderModes
 			if((texture == null) || (texture == General.Map.Data.WhiteTexture) ||
 			   (texture.Width <= 0) || (texture.Height <= 0) || !texture.IsImageLoaded)
 			{
-				General.Interface.MessageBeep(MessageBeepType.Default);
-				General.Interface.DisplayStatus(StatusType.Action, "The selected sector must have a loaded texture to align.");
+                SystemSounds.Beep.Play();
+                General.Interface.DisplayStatus(StatusType.Action, "The selected sector must have a loaded texture to align.");
 				General.Editing.CancelMode();
 				return;
 			}

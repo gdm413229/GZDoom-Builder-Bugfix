@@ -17,6 +17,7 @@
 #region ================== Namespaces
 
 using System;
+using System.Media;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -276,8 +277,8 @@ namespace CodeImp.DoomBuilder.Editing
 			}
 			else
 			{
-				// Copy not allowed
-				General.MessageBeep(MessageBeepType.Warning);
+                // Copy not allowed
+                SystemSounds.Exclamation.Play();
 			}
 			
 			// Aborted
@@ -386,15 +387,15 @@ namespace CodeImp.DoomBuilder.Editing
                     //      note that this is a hack and probably needs to be fixed properly by making it beep elsewhere so that the current active mode can decide this.
                     if (!(General.Editing.Mode is VisualMode))
                     {
-                        General.MessageBeep(MessageBeepType.Warning);
+                        SystemSounds.Exclamation.Play();
                     }
                 }
 			}
 			else
 			{
-				// Paste not allowed
-				General.MessageBeep(MessageBeepType.Warning);
-			}
+                // Paste not allowed
+                SystemSounds.Exclamation.Play();
+            }
 		}
 		
 		#endregion
@@ -445,9 +446,9 @@ namespace CodeImp.DoomBuilder.Editing
 			}
 			else
 			{
-				// Paste not allowed
-				General.MessageBeep(MessageBeepType.Warning);
-			}
+                // Paste not allowed
+                SystemSounds.Exclamation.Play();
+            }
 		}
 		
 		// This pastes what is on the clipboard and marks the new geometry
@@ -499,9 +500,9 @@ namespace CodeImp.DoomBuilder.Editing
 				}
 				else
 				{
-					// Can't make a prefab right now
-					General.MessageBeep(MessageBeepType.Warning);
-				}
+                    // Can't make a prefab right now
+                    SystemSounds.Exclamation.Play();
+                }
 				
 				// Done
 				General.MainWindow.UpdateInterface();
@@ -509,9 +510,9 @@ namespace CodeImp.DoomBuilder.Editing
 			}
 			else
 			{
-				// Create prefab not allowed
-				General.MessageBeep(MessageBeepType.Warning);
-			}
+                // Create prefab not allowed
+                SystemSounds.Exclamation.Play();
+            }
 		}
 		
 		// This pastes a prefab from file
@@ -573,9 +574,9 @@ namespace CodeImp.DoomBuilder.Editing
 			}
 			else
 			{
-				// Insert not allowed
-				General.MessageBeep(MessageBeepType.Warning);
-			}
+                // Insert not allowed
+                SystemSounds.Exclamation.Play();
+            }
 		}
 		
 		// This pastes the previously inserted prefab
@@ -630,21 +631,21 @@ namespace CodeImp.DoomBuilder.Editing
 					}
 					else
 					{
-						General.MessageBeep(MessageBeepType.Warning);
-						lastprefabfile = null;
+                        SystemSounds.Exclamation.Play();
+                        lastprefabfile = null;
 						General.MainWindow.UpdateInterface();
 					}
 				}
 				else
 				{
-					General.MessageBeep(MessageBeepType.Warning);
-				}
+                    SystemSounds.Exclamation.Play();
+                }
 			}
 			else
 			{
-				// Insert not allowed
-				General.MessageBeep(MessageBeepType.Warning);
-			}
+                // Insert not allowed
+                SystemSounds.Exclamation.Play();
+            }
 		}
 		
 		#endregion

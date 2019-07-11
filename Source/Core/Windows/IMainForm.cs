@@ -76,7 +76,6 @@ namespace CodeImp.DoomBuilder.Windows
 		void BreakExclusiveMouseInput();
 		void ResumeExclusiveMouseInput();
 		void SetCursor(Cursor cursor);
-		void MessageBeep(MessageBeepType type);
 		SizeF MeasureString(string text, Font font); //mxd
 		SizeF MeasureString(string text, Font font, int width, StringFormat format); //mxd
 

@@ -17,6 +17,7 @@
 #region ================== Namespaces
 
 using System;
+using System.Media;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CodeImp.DoomBuilder.Windows;
@@ -312,7 +313,7 @@ namespace CodeImp.DoomBuilder.Editing
 
 				if(!allowuse)
 				{
-					General.Interface.MessageBeep(MessageBeepType.Error);
+                    SystemSounds.Hand.Play();
 					General.WriteLogLine("Attempt to switch to an invalid edit mode " + nextmode.GetType().Name + "!");
 					return false;
 				}

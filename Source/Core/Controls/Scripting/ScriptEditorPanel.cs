@@ -17,6 +17,7 @@
 #region ================== Namespaces
 
 using System;
+using System.Media;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -521,7 +522,7 @@ namespace CodeImp.DoomBuilder.Controls
 			}
 			else
 			{
-				General.MessageBeep(MessageBeepType.Default);
+                SystemSounds.Beep.Play();
 				return false;
 			}
 		}
@@ -549,7 +550,7 @@ namespace CodeImp.DoomBuilder.Controls
 			} 
 			else 
 			{
-				General.MessageBeep(MessageBeepType.Default);
+                SystemSounds.Beep.Play();
 				return false;
 			}
 		}
@@ -1522,17 +1523,17 @@ namespace CodeImp.DoomBuilder.Controls
 			ScriptDocumentTab t = (tabs.SelectedTab as ScriptDocumentTab);
 			if((t != null))
 			{
-				if(t.ExplicitSave)
-					buttonsave_Click(this, EventArgs.Empty);
-				else if(t.Config.Compiler != null) //mxd
-					buttoncompile_Click(this, EventArgs.Empty);
-				else
-					General.MessageBeep(MessageBeepType.Default);
+                if (t.ExplicitSave)
+                    buttonsave_Click(this, EventArgs.Empty);
+                else if (t.Config.Compiler != null) //mxd
+                    buttoncompile_Click(this, EventArgs.Empty);
+                else
+                    SystemSounds.Beep.Play();
 			}
 			else
 			{
-				General.MessageBeep(MessageBeepType.Default);
-			}
+                SystemSounds.Beep.Play();
+            }
 		}
 		
 		// This opens a script
@@ -1578,8 +1579,8 @@ namespace CodeImp.DoomBuilder.Controls
 				case ScriptStatusType.Warning:
 					if(!newstatus.displayed)
 					{
-						General.MessageBeep(MessageBeepType.Warning);
-						statusflasher.Interval = MainForm.WARNING_FLASH_INTERVAL;
+                        SystemSounds.Exclamation.Play();
+                        statusflasher.Interval = MainForm.WARNING_FLASH_INTERVAL;
 						statusflashcount = MainForm.WARNING_FLASH_COUNT;
 						statusflasher.Start();
 						statusresetter.Interval = MainForm.WARNING_RESET_DELAY;
@@ -2132,13 +2133,13 @@ namespace CodeImp.DoomBuilder.Controls
 
 		private void searchnext_Click(object sender, EventArgs e)
 		{
-			if(!ActiveTab.FindNext(GetQuickSearchOptions(), false)) General.MessageBeep(MessageBeepType.Default);
-		}
+			if(!ActiveTab.FindNext(GetQuickSearchOptions(), false)) SystemSounds.Beep.Play();
+        }
 
 		private void searchprev_Click(object sender, EventArgs e) 
 		{
-			if(!ActiveTab.FindPrevious(GetQuickSearchOptions())) General.MessageBeep(MessageBeepType.Default);
-		}
+			if(!ActiveTab.FindPrevious(GetQuickSearchOptions())) SystemSounds.Beep.Play();
+        }
 
 		// This flashes the status icon
 		private void statusflasher_Tick(object sender, EventArgs e)

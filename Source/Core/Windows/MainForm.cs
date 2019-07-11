@@ -17,6 +17,7 @@
 #region ================== Namespaces
 
 using System;
+using System.Media;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -338,12 +339,6 @@ namespace CodeImp.DoomBuilder.Windows
 
 			UpdateEditMenu();
 			UpdatePrefabsMenu();
-		}
-
-		// This makes a beep sound
-		public void MessageBeep(MessageBeepType type)
-		{
-			General.MessageBeep(type);
 		}
 
 		// This sets up the interface
@@ -840,8 +835,8 @@ namespace CodeImp.DoomBuilder.Windows
 				case StatusType.Warning:
 					if(!newstatus.displayed)
 					{
-						MessageBeep(MessageBeepType.Warning);
-						statusflasher.Interval = WARNING_FLASH_INTERVAL;
+                        SystemSounds.Exclamation.Play();
+                        statusflasher.Interval = WARNING_FLASH_INTERVAL;
 						statusflashcount = WARNING_FLASH_COUNT;
 						statusflasher.Start();
 						statusresetter.Interval = WARNING_RESET_DELAY;
@@ -2926,8 +2921,8 @@ namespace CodeImp.DoomBuilder.Windows
 			if (General.Map.Map.SelectedLinedefsCount != 1)
 			{
 				General.Interface.DisplayStatus(StatusType.Warning, "Exactly one linedef must be selected");
-				General.Interface.MessageBeep(MessageBeepType.Warning);
-				return;
+                SystemSounds.Exclamation.Play();
+                return;
 			}
 			Linedef line = General.Map.Map.SelectedLinedefs.First.Value;
 			Vertex vertex = line.Start;
@@ -2943,8 +2938,8 @@ namespace CodeImp.DoomBuilder.Windows
 			if (General.Map.Map.SelectedVerticessCount != 1)
 			{
 				General.Interface.DisplayStatus(StatusType.Warning, "Exactly one vertex must be selected");
-				General.Interface.MessageBeep(MessageBeepType.Warning);
-				return;
+                SystemSounds.Exclamation.Play();
+                return;
 			}
 			Vertex vertex = General.Map.Map.SelectedVertices.First.Value;
 			General.Map.Grid.SetGridOrigin(vertex.Position.x, vertex.Position.y);
