@@ -54,7 +54,9 @@ namespace CodeImp.DoomBuilder.Windows
 			this.btnNewEngine = new System.Windows.Forms.Button();
 			this.cbEngineSelector = new System.Windows.Forms.ComboBox();
 			this.label13 = new System.Windows.Forms.Label();
-			this.shortpaths = new System.Windows.Forms.CheckBox();
+#if Windows
+            this.shortpaths = new System.Windows.Forms.CheckBox();
+#endif
 			this.customparameters = new System.Windows.Forms.CheckBox();
 			this.skill = new CodeImp.DoomBuilder.Controls.ActionSelectorControl();
 			this.browsetestprogram = new System.Windows.Forms.Button();
@@ -343,7 +345,9 @@ namespace CodeImp.DoomBuilder.Windows
 			this.tabtesting.Controls.Add(this.btnNewEngine);
 			this.tabtesting.Controls.Add(this.cbEngineSelector);
 			this.tabtesting.Controls.Add(this.label13);
-			this.tabtesting.Controls.Add(this.shortpaths);
+#if Windows
+            this.tabtesting.Controls.Add(this.shortpaths);
+#endif
 			this.tabtesting.Controls.Add(this.customparameters);
 			this.tabtesting.Controls.Add(this.skill);
 			this.tabtesting.Controls.Add(label8);
@@ -405,10 +409,11 @@ namespace CodeImp.DoomBuilder.Windows
 			this.label13.Size = new System.Drawing.Size(43, 13);
 			this.label13.TabIndex = 37;
 			this.label13.Text = "Engine:";
-			// 
-			// shortpaths
-			// 
-			this.shortpaths.AutoSize = true;
+#if Windows
+            // 
+            // shortpaths
+            // 
+            this.shortpaths.AutoSize = true;
 			this.shortpaths.Location = new System.Drawing.Point(87, 217);
 			this.shortpaths.Name = "shortpaths";
 			this.shortpaths.Size = new System.Drawing.Size(269, 17);
@@ -417,6 +422,7 @@ namespace CodeImp.DoomBuilder.Windows
 			this.shortpaths.UseVisualStyleBackColor = true;
 			this.shortpaths.Visible = false;
 			this.shortpaths.CheckedChanged += new System.EventHandler(this.shortpaths_CheckedChanged);
+#endif
 			// 
 			// customparameters
 			// 
@@ -850,7 +856,7 @@ namespace CodeImp.DoomBuilder.Windows
 
 		}
 
-		#endregion
+#endregion
 
 		private System.Windows.Forms.Button cancel;
 		private System.Windows.Forms.Button apply;

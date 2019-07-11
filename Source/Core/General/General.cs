@@ -79,35 +79,35 @@ namespace CodeImp.DoomBuilder
 		[DllImport("user32.dll", SetLastError = true)]
 		internal static extern bool MessageBeep(MessageBeepType type);
 
-		//[DllImport("kernel32.dll")]
-		//internal extern static IntPtr LoadLibrary(string filename);
+        //[DllImport("kernel32.dll")]
+        //internal extern static IntPtr LoadLibrary(string filename);
 
-		//[DllImport("kernel32.dll")]
-		//internal extern static bool FreeLibrary(IntPtr moduleptr);
+        //[DllImport("kernel32.dll")]
+        //internal extern static bool FreeLibrary(IntPtr moduleptr);
 
-		//[DllImport("user32.dll")]
-		/*internal static extern IntPtr CreateWindowEx(uint exstyle, string classname, string windowname, uint style,
-												   int x, int y, int width, int height, IntPtr parentptr, int menu,
-												   IntPtr instanceptr, string param);*/
+        //[DllImport("user32.dll")]
+        /*internal static extern IntPtr CreateWindowEx(uint exstyle, string classname, string windowname, uint style,
+                                                   int x, int y, int width, int height, IntPtr parentptr, int menu,
+                                                   IntPtr instanceptr, string param);*/
 
-		//[DllImport("user32.dll")]
-		//internal static extern bool DestroyWindow(IntPtr windowptr);
+        //[DllImport("user32.dll")]
+        //internal static extern bool DestroyWindow(IntPtr windowptr);
 
-		//[DllImport("user32.dll")]
-		//internal static extern int SetWindowPos(IntPtr windowptr, int insertafterptr, int x, int y, int cx, int cy, int flags);
-		
-		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        //[DllImport("user32.dll")]
+        //internal static extern int SetWindowPos(IntPtr windowptr, int insertafterptr, int x, int y, int cx, int cy, int flags);
+#if Windows
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		private static extern uint GetShortPathName([MarshalAs(UnmanagedType.LPTStr)] string longpath, [MarshalAs(UnmanagedType.LPTStr)]StringBuilder shortpath, uint buffersize);
-
+#endif
 		//[DllImport("user32.dll")]
 		//internal static extern int SetScrollInfo(IntPtr windowptr, int bar, IntPtr scrollinfo, bool redraw);
 
 		//[DllImport("user32.dll")]
 		//internal static extern int GetScrollInfo(IntPtr windowptr, int bar, IntPtr scrollinfo);
 
-		#endregion
+#endregion
 
-		#region ================== Constants
+#region ================== Constants
 
 		// SendMessage API
 		internal const int WM_USER = 0x400;
@@ -144,9 +144,9 @@ namespace CodeImp.DoomBuilder
 		private const string TEXTURES_DIR = "Textures"; //mxd
 		private const string HELP_FILE = "Refmanual.chm";
 
-		#endregion
+#endregion
 
-		#region ================== Variables
+#region ================== Variables
 
 		// Files and Folders
 		private static string apppath;
@@ -202,9 +202,9 @@ namespace CodeImp.DoomBuilder
 		//misc
 		private static readonly Random random = new Random(); //mxd
 
-		#endregion
+#endregion
 
-		#region ================== Properties
+#region ================== Properties
 
 		public static Assembly ThisAssembly { get { return thisasm; } }
 		public static string AppPath { get { return apppath; } }
@@ -246,9 +246,9 @@ namespace CodeImp.DoomBuilder
 		public static ErrorLogger ErrorLogger { get { return errorlogger; } }
 		public static string CommitHash { get { return commithash; } } //mxd
 
-		#endregion
+#endregion
 
-		#region ================== Configurations
+#region ================== Configurations
 
 		// This returns the game configuration info by filename
 		internal static ConfigurationInfo GetConfigurationInfo(string filename)
@@ -529,23 +529,23 @@ namespace CodeImp.DoomBuilder
 			return null;
 		}
 		
-		#endregion
+#endregion
 
-		#region ================== Startup
+#region ================== Startup
 
 		// Main program entry
 		[STAThread]
 		internal static void Main(string[] args)
 		{
 			// Determine states
-			#if DEBUG
+#if DEBUG
 				debugbuild = true;
-			#else
+#else
 				debugbuild = false;
 				//mxd. Custom exception dialog.
 				AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 				Application.ThreadException += Application_ThreadException;
-			#endif
+#endif
 
 			// Enable OS visual styles
 			Application.EnableVisualStyles();
@@ -990,9 +990,9 @@ namespace CodeImp.DoomBuilder
 			autoloadfile = null;
 		}
 		
-		#endregion
+#endregion
 		
-		#region ================== Terminate
+#region ================== Terminate
 
 		// This is for plugins to use
 		public static void Exit(bool properexit)
@@ -1062,9 +1062,9 @@ namespace CodeImp.DoomBuilder
 			Process.GetCurrentProcess().Kill();
 		}
 		
-		#endregion
+#endregion
 		
-		#region ================== Management
+#region ================== Management
 		
 		// This creates a new map
 		[BeginAction("newmap")]
@@ -1687,9 +1687,9 @@ namespace CodeImp.DoomBuilder
 			}
 		}
 		
-		#endregion
+#endregion
 
-		#region ================== Debug
+#region ================== Debug
 		
 		// This shows a major failure
 		public static void Fail(string message)
@@ -1731,9 +1731,9 @@ namespace CodeImp.DoomBuilder
 			catch(Exception) { }
 		}
 		
-		#endregion
+#endregion
 
-		#region ================== Tools
+#region ================== Tools
 		
 		// This swaps two pointers
 		public static void Swap<T>(ref T a, ref T b)
@@ -2114,10 +2114,14 @@ namespace CodeImp.DoomBuilder
 		// This returns the short path name for a file
 		public static string GetShortFilePath(string longpath)
 		{
-			const int maxlen = 256;
+#if Windows
+            const int maxlen = 256;
 			StringBuilder shortname = new StringBuilder(maxlen);
 			GetShortPathName(longpath, shortname, maxlen);
 			return shortname.ToString();
+#else
+            return longpath;
+#endif
 		}
 
 		//mxd
@@ -2163,9 +2167,9 @@ namespace CodeImp.DoomBuilder
             }
         }
 		
-		#endregion
+#endregion
 
-		#region ==================  mxd. Uncaught exceptions handling
+#region ==================  mxd. Uncaught exceptions handling
 
 		// In some cases the program can remain operational after these
 		private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e) 
@@ -2228,7 +2232,7 @@ namespace CodeImp.DoomBuilder
 			}
 		}
 
-		#endregion
+#endregion
 
 	}
 }

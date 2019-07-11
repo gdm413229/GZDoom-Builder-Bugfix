@@ -238,7 +238,9 @@ namespace CodeImp.DoomBuilder.Windows
 				nodebuildertest.SelectedIndex = -1;
 				testapplication.Text = "";
 				testparameters.Text = "";
-				shortpaths.Checked = false;
+#if Windows
+                shortpaths.Checked = false;
+#endif
 				skill.Value = 0;
 				skill.ClearInfo();
 				customparameters.Checked = false;
@@ -351,9 +353,13 @@ namespace CodeImp.DoomBuilder.Windows
 			// Map loaded?
 			if(General.Map != null)
 			{
-				// Make converted parameters
-				testresult.Text = General.Map.Launcher.ConvertParameters(testparameters.Text, skill.Value, shortpaths.Checked);
-			}
+                // Make converted parameters
+#if Windows
+                testresult.Text = General.Map.Launcher.ConvertParameters(testparameters.Text, skill.Value, shortpaths.Checked);
+#else
+                testresult.Text = General.Map.Launcher.ConvertParameters(testparameters.Text, skill.Value, false);
+#endif
+            }
 		}
 
 		//mxd
@@ -444,11 +450,13 @@ namespace CodeImp.DoomBuilder.Windows
 			// Apply to selected configuration
 			configinfo.CustomParameters = customparameters.Checked;
 			configinfo.Changed = true; //mxd
-
+            
 			// Update interface
 			labelparameters.Visible = customparameters.Checked;
 			testparameters.Visible = customparameters.Checked;
-			shortpaths.Visible = customparameters.Checked;
+#if Windows
+            shortpaths.Visible = customparameters.Checked;
+#endif
 
 			// Check if a map is loaded
 			if(General.Map != null)
@@ -466,22 +474,24 @@ namespace CodeImp.DoomBuilder.Windows
 				noresultlabel.Visible = customparameters.Checked;
 			}
 		}
-		
+
+#if Windows
 		// Use short paths changed
 		private void shortpaths_CheckedChanged(object sender, EventArgs e)
 		{
 			// Leave when no configuration selected
 			if(configinfo == null) return;
-			
-			// Apply to selected configuration
-			configinfo.TestShortPaths = shortpaths.Checked;
-			configinfo.Changed = true; //mxd
+
+            // Apply to selected configuration
+            configinfo.TestShortPaths = shortpaths.Checked;
+        configinfo.Changed = true; //mxd
 			
 			CreateParametersExample();
 		}
-		
-		// Skill changes
-		private void skill_ValueChanges(object sender, EventArgs e)
+#endif
+
+        // Skill changes
+        private void skill_ValueChanges(object sender, EventArgs e)
 		{
 			// Leave when no configuration selected
 			if(configinfo == null) return;
@@ -783,7 +793,9 @@ namespace CodeImp.DoomBuilder.Windows
 			configinfo.TestProgramName = cbEngineSelector.Text;
 			testapplication.Text = configinfo.TestProgram;
 			testparameters.Text = configinfo.TestParameters;
-			shortpaths.Checked = configinfo.TestShortPaths;
+#if Windows
+            shortpaths.Checked = configinfo.TestShortPaths;
+#endif
 			
 			int skilllevel = configinfo.TestSkill;
 			skill.Value = skilllevel - 1; //mxd. WHY???
@@ -805,7 +817,7 @@ namespace CodeImp.DoomBuilder.Windows
 			if(listconfigs.SelectedItems.Count > 0) listconfigs.SelectedItems[0].EnsureVisible();
 		}
 
-		#region ============= Copy/Paste context menu (mxd)
+#region ============= Copy/Paste context menu (mxd)
 
 		private void copypastemenu_Opening(object sender, System.ComponentModel.CancelEventArgs e) 
 		{
@@ -899,6 +911,6 @@ namespace CodeImp.DoomBuilder.Windows
 			General.Interface.DisplayStatus(StatusType.Info, "Pasted color presets from \"" + configinfocopy.Name + "\"");
 		}
 
-		#endregion
+#endregion
 	}
 }
