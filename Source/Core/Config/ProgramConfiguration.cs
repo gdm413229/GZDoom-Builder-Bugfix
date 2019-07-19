@@ -348,9 +348,14 @@ namespace CodeImp.DoomBuilder.Config
 				usehighlight = cfg.ReadSetting("usehighlight", true); //mxd
 				switchviewmodes = cfg.ReadSetting("switchviewmodes", false); //mxd
 
-				//mxd. Script editor
-				scriptfontname = cfg.ReadSetting("scriptfontname", "Courier New");
-				scriptfontsize = cfg.ReadSetting("scriptfontsize", 10);
+                //mxd. Script editor
+#if Linux
+                scriptfontname = cfg.ReadSetting("scriptfontname", "Bitstream Vera Mono");
+#else
+                // IIRC Courier New is available on macOS as well
+                scriptfontname = cfg.ReadSetting("scriptfontname", "Courier New");
+#endif
+                scriptfontsize = cfg.ReadSetting("scriptfontsize", 10);
 				scriptfontbold = cfg.ReadSetting("scriptfontbold", false);
 				scriptontop = cfg.ReadSetting("scriptontop", true);
 				scriptautoindent = cfg.ReadSetting("scriptautoindent", true);
@@ -362,9 +367,13 @@ namespace CodeImp.DoomBuilder.Config
 				scriptshowfolding = cfg.ReadSetting("scriptshowfolding", true);
 				scriptautoshowautocompletion = cfg.ReadSetting("scriptautoshowautocompletion", true);
 
-				//mxd. Text labels
-				textlabelfontname = cfg.ReadSetting("textlabelfontname", "Microsoft Sans Serif");
-				textlabelfontsize = cfg.ReadSetting("textlabelfontsize", 10);
+                //mxd. Text labels
+#if Linux
+                textlabelfontname = cfg.ReadSetting("textlabelfontname", "Bitstream Vera Sans");
+#else
+                textlabelfontname = cfg.ReadSetting("textlabelfontname", "Microsoft Sans Serif");
+#endif
+                textlabelfontsize = cfg.ReadSetting("textlabelfontsize", 10);
 				textlabelfontbold = cfg.ReadSetting("textlabelfontbold", false);
 
 				//mxd 
@@ -588,9 +597,9 @@ namespace CodeImp.DoomBuilder.Config
 			return true;
 		}
 		
-		#endregion
+#endregion
 
-		#region ================== Methods
+#region ================== Methods
 
 		// This makes the path prefix for the given assembly
 		private static string GetPluginPathPrefix(Assembly asm)
@@ -649,9 +658,9 @@ namespace CodeImp.DoomBuilder.Config
 		internal bool DeleteSetting(string setting) { return cfg.DeleteSetting(setting); }
 		internal bool DeleteSetting(string setting, string pathseperator) { return cfg.DeleteSetting(setting, pathseperator); }
 
-		#endregion
+#endregion
 
-		#region ================== Default Settings
+#region ================== Default Settings
 
 		// This sets the default thing flags
 		public void SetDefaultThingFlags(ICollection<string> setflags)
@@ -839,6 +848,6 @@ namespace CodeImp.DoomBuilder.Config
 			if(string.IsNullOrEmpty(General.Map.Options.DefaultCeilingTexture)) General.Map.Options.DefaultCeilingTexture = "-";
 		}
 		
-		#endregion
+#endregion
 	}
 }
