@@ -1140,7 +1140,6 @@
       <DependentUpon>SectorEditFormUDMF.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusInfo.cs" />
-    <Compile Include="Windows\TanColorTable.cs" />
     <Compile Include="Windows\ThingBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
