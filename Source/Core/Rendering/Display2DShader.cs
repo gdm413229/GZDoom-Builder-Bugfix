@@ -17,8 +17,8 @@
 #region ================== Namespaces
 
 using System;
-using SlimDX.Direct3D9;
-using SlimDX;
+using SlimDX.Direct3D9; // FIXME: the hellish seven-headed, ten-horned dragon in the room!
+using SlimDX; // FIXME: ditto, will be substituted with Winforms-ready GL bindings.
 
 #endregion
 

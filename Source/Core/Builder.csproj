@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{818B3D10-F791-4C3F-9AF5-BB2D0079B63C}</ProjectGuid>
@@ -592,6 +592,14 @@
     <Compile Include="ZDoom\ZScriptStateGoto.cs" />
     <Compile Include="ZDoom\ZScriptStateStructure.cs" />
     <Compile Include="ZDoom\ZScriptTokenizer.cs" />
+    <Compile Include="Rendering\GLContext.cs" />
+    <Compile Include="Rendering\GLPixColor.cs" />
+    <Compile Include="Rendering\GLShaderManager.cs" />
+    <Compile Include="Rendering\IGLRenderer2D.cs" />
+    <Compile Include="Rendering\IGLResource.cs" />
+    <Compile Include="Rendering\GLRenderer.cs" />
+    <Compile Include="Rendering\GLColorCollection.cs" />
+    <Compile Include="Linux\SlimGL.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Profiler.Core.Api, Version=1.3.1661.20096, Culture=neutral, PublicKeyToken=1010a0d8d6380325" Condition=" '$(Configuration)|$(Platform)' == 'Debug + Profiler|x86' Or '$(Configuration)|$(Platform)' == 'Release + Profiler|x86' ">
@@ -605,13 +613,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Build\SharpCompress.dll</HintPath>
     </Reference>
-    <Reference Include="SlimDX, Version=v4.0.30319, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Build\SlimDX.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -621,6 +624,23 @@
     <Reference Include="System.Xml" />
     <Reference Include="TabControlEX, Version=0.0.3271.41578, Culture=neutral, PublicKeyToken=1db242dc828e4b4e">
       <Private>False</Private>
+    </Reference>
+    <Reference Include="OpenGL.Net.WinForms">
+      <HintPath>..\..\packages\OpenGL.Net.WinForms.0.8.4\lib\net461\OpenGL.Net.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenGL.Net">
+      <HintPath>..\..\packages\OpenGL.Net.0.8.4\lib\net461\OpenGL.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>..\..\packages\System.Numerics.Vectors.4.3.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenGL.Net.Math">
+      <HintPath>..\..\packages\OpenGL.Net.Math.0.8.4\lib\net461\OpenGL.Net.Math.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -684,6 +704,7 @@
     <None Include="Resources\SaveMap.png" />
     <None Include="Resources\OpenMap.png" />
     <None Include="Resources\NewMap.png" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\ActionBrowserForm.resx">

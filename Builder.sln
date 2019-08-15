@@ -20,9 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagRange", "Source\Plugins\TagRange\TagRange.csproj", "{F49EFF6D-51CB-4E49-8223-AAE653C5B62F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisplaneExplorer", "Source\Plugins\VisplaneExplorer\VisplaneExplorer.csproj", "{CF670175-7099-4090-A330-EE25C7230139}"
-	ProjectSection(ProjectDependencies) = postProject
-		{29C8D76F-DE3D-482D-AD7D-B86BBD0824DE} = {29C8D76F-DE3D-482D-AD7D-B86BBD0824DE}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundPropagation", "Source\Plugins\SoundPropagationMode\SoundPropagation.csproj", "{F59B344C-DD50-4DB7-ADDD-56AAD66450AF}"
 EndProject

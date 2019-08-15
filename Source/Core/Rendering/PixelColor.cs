@@ -18,12 +18,13 @@
 
 using System;
 using System.Drawing;
-using SlimDX;
+using SlimDX; // Will be substituted with OpenGL namespace.
 
 #endregion
 
 namespace CodeImp.DoomBuilder.Rendering
 {
+    // DirectX pixel color struct, Windows only
 	public struct PixelColor
 	{
 		#region ================== Constants

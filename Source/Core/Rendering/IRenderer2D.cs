@@ -26,6 +26,7 @@ using CodeImp.DoomBuilder.Data;
 
 namespace CodeImp.DoomBuilder.Rendering
 {
+    // [gdm413229] Direct3D only!  For Linux, it uses IGLRenderer2D
 	public interface IRenderer2D
 	{
 		// Properties

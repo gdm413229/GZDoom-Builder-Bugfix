@@ -14,6 +14,12 @@
 
 #endregion
 
+#region Platform-related Info
+
+ /* The newly-created GLContext class is a substitute for D3DDevice on Linux. */
+
+#endregion
+
 #region ================== Namespaces
 
 using System;
@@ -22,8 +28,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using CodeImp.DoomBuilder.Controls;
 using CodeImp.DoomBuilder.Geometry;
-using SlimDX;
-using SlimDX.Direct3D9;
+using SlimDX; // [gdm413229] Windows only!
+using SlimDX.Direct3D9; // [gdm413229] ditto
 
 #endregion
 

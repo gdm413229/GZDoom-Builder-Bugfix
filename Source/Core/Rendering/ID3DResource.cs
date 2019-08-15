@@ -20,6 +20,7 @@
 
 namespace CodeImp.DoomBuilder.Rendering
 {
+    // [gdm413229] Windows (Direct3D) only!
 	internal interface ID3DResource
 	{
 		// This is used to unload the resouce
