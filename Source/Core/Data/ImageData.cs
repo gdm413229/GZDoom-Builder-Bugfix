@@ -26,8 +26,8 @@ using CodeImp.DoomBuilder.Geometry;
 using CodeImp.DoomBuilder.IO;
 using CodeImp.DoomBuilder.Rendering;
 using CodeImp.DoomBuilder.Windows;
-using SlimDX;
-using SlimDX.Direct3D9;
+using SlimDX; // I think that Ouija boards were involved in the development of DirectX.
+using SlimDX.Direct3D9;  // Let's take Microsoft's Ouija boards away!
 
 #endregion
 

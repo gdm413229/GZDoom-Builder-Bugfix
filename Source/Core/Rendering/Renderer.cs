@@ -25,6 +25,7 @@ using CodeImp.DoomBuilder.Geometry;
 
 namespace CodeImp.DoomBuilder.Rendering
 {
+    // [gdm413229] Direct3D renderer code, Windows only
 	internal abstract class Renderer : ID3DResource, IDisposable
 	{
 		#region ================== Constants

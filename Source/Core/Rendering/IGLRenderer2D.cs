@@ -51,11 +51,38 @@ namespace CodeImp.DoomBuilder.Rendering
         void UpdateExtraFloorFlag(); //mxd
 
         // Rendering management methods
+        // Can anyone give me a GL equivalent of those funcs???
         bool StartPlotter(bool clear);
         bool StartThings(bool clear);
         bool StartOverlay(bool clear);
-        void Finish();
+        void Finish(); // Will have glFlush or glFinish.  Explicit synchronization!
         void SetPresentation(Presentation present);
         void Present();
+
+        // Drawing methods, now GL-ified
+        // D3D DrawIndexed calls will be turned into glDrawElements
+        void PlotLine(Vector2D start, Vector2D end, GLPixColor c);
+        void PlotLine(Vector2D start, Vector2D end, GLPixColor c, float lengthscaler); //mxd
+        void PlotLinedef(Linedef l, GLPixColor c);
+        void PlotLinedefSet(ICollection<Linedef> linedefs);
+        void PlotSector(Sector s);
+        void PlotSector(Sector s, GLPixColor c);
+        void PlotVertex(Vertex v, int colorindex);
+        void PlotVertexAt(Vector2D v, int colorindex);
+        void PlotVerticesSet(ICollection<Vertex> vertices);
+        void RenderThing(Thing t, GLPixColor c, float alpha);
+        void RenderThingSet(ICollection<Thing> things, float alpha);
+        void RenderRectangle(RectangleF rect, float bordersize, GLPixColor c, bool transformrect);
+        void RenderRectangleFilled(RectangleF rect, GLPixColor c, bool transformrect);
+        void RenderRectangleFilled(RectangleF rect, GLPixColor c, bool transformrect, ImageData texture);
+        void RenderLine(Vector2D start, Vector2D end, float thickness, GLPixColor c, bool transformcoords);
+        void RenderArrows(ICollection<Line3D> line); //mxd
+        void RenderArrows(ICollection<Line3D> line, bool transformcoords); //mxd
+        void RenderText(TextLabel text); //mxd, DB2 compatibility
+        void RenderText(ITextLabel text); //mxd
+        void RenderText(IList<ITextLabel> labels); //mxd
+        void RenderGeometry(FlatVertex[] vertices, ImageData texture, bool transformcoords);
+        void RenderHighlight(FlatVertex[] vertices, int color); //mxd
+        void RedrawSurface();
     }
 }

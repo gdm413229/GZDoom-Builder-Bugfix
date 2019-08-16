@@ -18,7 +18,7 @@
 
 using System;
 using System.IO;
-using SlimDX.Direct3D9;
+using SlimDX.Direct3D9; // See you under Satan's hooves, DirectX!
 
 #endregion
 

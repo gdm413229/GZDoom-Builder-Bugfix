@@ -22,7 +22,7 @@ using CodeImp.DoomBuilder.Geometry;
 namespace CodeImp.DoomBuilder.Rendering
 {
     // Another step closer to casting SlimDX into the lake of fire
-    internal abstract class GLRenderer
+    internal abstract class GLRenderer : IGLResource
     {
 
         protected GLContext graphics;
@@ -33,5 +33,25 @@ namespace CodeImp.DoomBuilder.Rendering
             // No dtor for this class!
             GC.SuppressFinalize(this);
         }
+        // Disposer
+        public virtual void Dispose()
+        {
+            // Not already disposed?
+            if (!isdisposed)
+            {
+                // Clean up
+
+                // Destroy context
+                // graphics.UnregisterResource(this);
+
+                // Done
+                graphics = null;
+                isdisposed = true;
+            }
+        }
+
+        // For GL resources
+        public virtual void UnloadGLResource() { }
+        public virtual void ReloadGLResource() { }
     }
 }
