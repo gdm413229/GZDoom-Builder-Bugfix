@@ -22,6 +22,7 @@ using System;
 
 namespace CodeImp.DoomBuilder.Rendering
 {
+    // For Direct3D.
 	internal class ShaderManager : ID3DResource, IDisposable
 	{
 		#region ================== Constants

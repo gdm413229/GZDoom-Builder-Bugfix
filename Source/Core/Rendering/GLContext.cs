@@ -34,11 +34,9 @@ namespace CodeImp.DoomBuilder.Rendering
         private string GLDevice; // GL_RENDERER goes here
         private string GLVersion;
         private uint GLExtensionCnt; // Number of probed GL extensions
-        private string[GLExtensionCnt] GLExtensions; // OpenGL counterpart to D3D device caps
+        private string[] GLExtensions; // OpenGL counterpart to D3D device caps
 
         public IntPtr context;
-
-        public string[] GLExtensions1 { get => GLExtensions; set => GLExtensions = value; }
 
         #endregion
 

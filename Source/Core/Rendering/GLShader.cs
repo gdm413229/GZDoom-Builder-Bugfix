@@ -1,10 +1,22 @@
 ﻿using System;
+using System.IO; // For shader file loading.
+
 namespace CodeImp.DoomBuilder.Rendering
 {
-    public class GLShader
+    internal abstract class GLShader : IDisposable
     {
-        public GLShader()
+
+        protected GLShaderManager manager;
+        private bool isdisposed;
+
+        protected GLShader(GLShaderManager manager) 
+        { 
+
+        }
+
+        public virtual void Dispose()
         {
+            // TODO: write disposal func
         }
     }
 }

@@ -49,6 +49,7 @@ namespace CodeImp.DoomBuilder.Data
 		protected Vector2D scale;
 		protected bool worldpanning;
 		private bool usecolorcorrection;
+        // [gdm413229] In POSIX, the filenames have no drive letters and use forward slash dir. delimiters.
 		protected string filepathname; //mxd. Absolute path to the image;
 		protected string shortname; //mxd. Name in uppercase and clamped to DataManager.CLASIC_IMAGE_NAME_LENGTH
 		protected string virtualname; //mxd. Path of this name is used in TextureBrowserForm

@@ -9,4 +9,3 @@ obj
 /Build/Plugins/*.dll
 /Build/Builder.pdb
 /Build/Builder.exe.config
-/packages

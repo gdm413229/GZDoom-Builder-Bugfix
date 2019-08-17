@@ -24,6 +24,7 @@ using SlimDX.Direct3D9; // See you under Satan's hooves, DirectX!
 
 namespace CodeImp.DoomBuilder.Rendering
 {
+    // I view D3D9 HLSL as an act of heresy against cross-OS shaders. (unless if you use certain HLSL compilers)
 	internal abstract class D3DShader : IDisposable
 	{
 		#region ================== Constants

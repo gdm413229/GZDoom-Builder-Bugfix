@@ -60,6 +60,8 @@ namespace CodeImp.DoomBuilder.Rendering
         // ＣＯＰＹ　ＴＨＡＴ　ＰＩＸＥＬ　ＣＯＬＯＲ！
         public GLPixColor(GLPixColor src) => this = src;
 
+        public static readonly GLPixColor Transparent = new GLPixColor(0,0,0,0);
+
         // Color crunchers!
 
         // Add two cols together
