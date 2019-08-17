@@ -1,0 +1,7 @@
+THE TODO LIST FOR THIS BRANCH
+
+Convert icons to .xpm and .png [this branch]
+
+Turn Direct3D 9 to modern OpenGL, including the shaders! (kinda like translating from infernal language to angelic language)
+
+POSIX-ify the Windows API calls, all of them with a no-nonsense approach!

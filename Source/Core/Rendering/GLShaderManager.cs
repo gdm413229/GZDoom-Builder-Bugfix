@@ -20,6 +20,7 @@ namespace CodeImp.DoomBuilder.Rendering
     // [gdm413229] OpenGL version of ShaderManager class
     internal class GLShaderManager : IDisposable
     {
+
         // Manages GL shader programs.
 
         private GLDisp2DShader display2dshader;
