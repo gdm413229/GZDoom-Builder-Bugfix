@@ -1,5 +1,7 @@
 ﻿using System;
-using System.IO; // For shader file loading.
+using System.IO; // For GLSL shader file loading.
+using OpenGL;
+using System.Xml; // for those *_glfx.xml files!
 
 namespace CodeImp.DoomBuilder.Rendering
 {

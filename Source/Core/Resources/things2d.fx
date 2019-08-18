@@ -127,7 +127,7 @@ technique SM20
 
 	pass p2 //mxd
 	{
-		VertexShader = compile vs_2_0 vs_transform();
+		VertexShader = compile vs_2_0 vs_transform(); // will be gl_2dxform.frag post-GLSL-ification.
 		PixelShader = compile ps_2_0 ps_fill();
 	}
 }

@@ -23,18 +23,28 @@
  * 
  */
 
-/* 2D xform shader translated from D3D9 SM2 HLSL :D */
+/* Display2D GL shader : Antialiased [shader-based full scene AA!] drawing */
 
-uniform vec2 VERTEX_POS; uniform vec2 VERTEX_UV;
-uniform vec4 VERTEX_COL;
-uniform mat3 VIEWXFRM_MAT;
+/* Vert. shader inputs: UVs and vert. cols passed from vert. shader. */
 
-out vec2 413229_gl_uvs;
-out vec4 413229_gl_vertcol;
+in vec2 413229_gl_uvs;
+in vec4 413229_gl_vertcol; // x = red, y = green, z = blue, w = alpha
 
-void main()
+const vec4 grey=();
+
+vec4 addcolor(vec4 lhs, vec4 rhs)
 {
-	gl_Position = VERTEX_POS*VIEWXFRM_MAT; // Mul. that matrix!
-	413229_gl_vertcol = VERTEX_COL;
-	413229_gl_uvs = VERTEX_UV;
+	vec4 src=lhs;
+	vec4 dst=rhs;
+	dst.x = max(src.x + dst.x);
+	dst.y = max(src.y + dst.y);
+	dst.z = max(src.z + dst.z);
+	dst.w = clamp((src.w+dst.w)*0.5f,0.0,1.0); // Equiv. to saturate(val); in D3D HLSL.
+	return dst;
+}
+
+void main() 
+{
+	vec4 mixedcol = (0,0,0,0);
+	gl_FragColor = ;
 }
