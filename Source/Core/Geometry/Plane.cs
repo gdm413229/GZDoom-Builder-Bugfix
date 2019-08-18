@@ -22,6 +22,7 @@ using System;
 
 namespace CodeImp.DoomBuilder.Geometry
 {
+    // [gdm413229] SlimDX-independent! :)  If somehow, I could use that in my GL renderer...
 	public struct Plane
 	{
 		#region ================== Constants

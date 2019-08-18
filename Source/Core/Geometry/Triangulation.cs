@@ -24,6 +24,17 @@ using CodeImp.DoomBuilder.IO;
 
 #endregion
 
+#region gdm413229's comments
+
+/* This could be jury rigged for both D3D and GL.  I'm sick to death and hell with Microsoft
+ * emptying vacuum cleaner bags all over my PC. */
+
+    /* Windows 10 is the third time Microsoft emptied a vacuum cleaner bag
+     * on Windows' userbase!  The first time was with the release of Windows ME
+     * and the second time with Windows Vista. */
+
+#endregion
+
 namespace CodeImp.DoomBuilder.Geometry
 {
 	/// <summary>

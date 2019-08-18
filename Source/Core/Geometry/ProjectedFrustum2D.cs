@@ -22,6 +22,8 @@ using System;
 
 namespace CodeImp.DoomBuilder.Geometry
 {
+    // [gdm413229] Still independent from the abode of the Whore of Redmond! :D
+    // I sometimes call Cortana from Windows 10 the Whore of Redmond.
 	public class ProjectedFrustum2D
 	{
 		#region ================== Variables

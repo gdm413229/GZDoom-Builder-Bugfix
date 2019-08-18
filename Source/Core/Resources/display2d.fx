@@ -1,20 +1,22 @@
 // 2D display rendering shader
 // Copyright (c) 2007 Pascal vd Heiden, www.codeimp.com
 
+// [gdm413229] TODO: turn this into glsl
+
 // Vertex input data
 struct VertexData
 {
-	float3 pos		: POSITION;
+	float3 pos		: POSITION; // Will be turned into GL equivalent.
 	float4 color	: COLOR0;
 	float2 uv		: TEXCOORD0;
 };
 
-// Pixel input data
+// Pixel/fragment input data
 struct PixelData
 {
-	float4 pos		: POSITION;
+	float4 pos		: POSITION; // Will be gl_Position in GLSL
 	float4 color	: COLOR0;
-	float2 uv		: TEXCOORD0;
+	float2 uv		: TEXCOORD0; // Tex. coords for tex. slot 1 [GL haz 32 tex. slots!]
 };
 
 // Render settings
@@ -28,7 +30,7 @@ float4 rendersettings;
 float4x4 transformsettings;
 
 // Filter settings
-dword filtersettings;
+dword filtersettings; // [gdm413229] That is a 32-bit int, I presume.
 
 //
 float desaturation;
@@ -118,6 +120,8 @@ float4 ps_fullbright(PixelData pd) : COLOR
 }
 
 // Technique for shader model 2.0
+
+// [gdm413229] GL renderers may need XML files for render passes!
 technique SM20
 {
 	pass p0

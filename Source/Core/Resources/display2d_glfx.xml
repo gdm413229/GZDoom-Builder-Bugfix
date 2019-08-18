@@ -1,0 +1,14 @@
+<413229_glfx>
+	<pass n=0>
+		<compile type=vert>./Resources/gl_2dxform.vert</compile>
+		<compile type=frag>./Resources/gl_disp2d_aadraw.frag</compile>
+	</pass>
+	<pass n=1>
+		<compile type=vert>./Resources/gl_2dxform.vert</compile>
+		<compile type=frag>./Resources/gl_disp2d_normdraw.frag</compile>
+	</pass>
+	<pass n=2>
+		<compile type=vert>./Resources/gl_2dxform.vert</compile>
+		<compile type=frag>./Resources/gl_disp2d_fullbrt.frag</compile>
+	</pass>
+</413229_glfx>
