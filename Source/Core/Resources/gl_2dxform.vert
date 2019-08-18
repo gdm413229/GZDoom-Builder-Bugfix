@@ -25,9 +25,9 @@
 
 /* 2D xform shader translated from D3D9 SM2 HLSL :D */
 
-uniform vec2 VERTEX_POS; uniform vec2 VERTEX_UV;
+uniform vec3 VERTEX_POS; uniform vec2 VERTEX_UV;
 uniform vec4 VERTEX_COL;
-uniform mat3 VIEWXFRM_MAT;
+uniform mat4 VIEWXFRM_MAT;
 
 out vec2 413229_gl_uvs;
 out vec4 413229_gl_vertcol;
