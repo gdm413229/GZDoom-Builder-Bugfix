@@ -22,8 +22,26 @@ using System.Drawing;
 using System.Windows.Forms;
 using CodeImp.DoomBuilder.Controls;
 using CodeImp.DoomBuilder.Geometry;
+
+/* SlimDX on the glass, MonoGame on the pingu. */
+
+#if Windows
+
+// [gdm413229] SlimDX is Windows only, unless if I Vulkanize it with D9VK's help.
+
 using SlimDX;
 using SlimDX.Direct3D9;
+
+#else
+
+/* MonoGame is src-compatible with the old 'n' dusty XNA.
+ * Not sure how to go around turning SlimDX calls into MonoGame ones. */
+
+using Microsoft.Xna.Framework.Graphics; // Might have some degree of compatibility. :D
+
+// [gdm413229] And GZDB-BF uses D3D9, so that means that it may be compatible with MonoGame!
+
+#endif
 
 #endregion
 
@@ -31,10 +49,10 @@ namespace CodeImp.DoomBuilder.Rendering
 {
 	internal class D3DDevice : IDisposable
 	{
-		#region ================== Constants
+#region ================== Constants
 
 		// NVPerfHUD device name
-		private const string NVPERFHUD_ADAPTER = "NVPerfHUD";
+		//private const string NVPERFHUD_ADAPTER = "NVPerfHUD";
 
 		//mxd. Anisotropic filtering steps
 		public static readonly List<float> AF_STEPS = new List<float> { 1.0f, 2.0f, 4.0f, 8.0f, 16.0f }; 
@@ -42,12 +60,14 @@ namespace CodeImp.DoomBuilder.Rendering
 		//mxd. Antialiasing steps
 		public static readonly List<int> AA_STEPS = new List<int> { 0, 2, 4, 8 };
 
-		#endregion
+        #endregion
 
-		#region ================== Variables
+#region ================== Variables
 
-		// Settings
-		private int adapter;
+#if Windows
+
+        // Settings
+        private int adapter;
 		private Filter postfilter;
 		private Filter mipgeneratefilter;
 		private static bool isrendering; //mxd
@@ -66,11 +86,21 @@ namespace CodeImp.DoomBuilder.Rendering
 		// Disposing
 		private bool isdisposed;
 
-		#endregion
+#else
 
-		#region ================== Properties
+        private GraphicsAdapter adapter;
+        private static bool isrendering; //mxd, will be used in MonoGame ver by gdm413229.
+        private GraphicsDevice device;
 
-		internal Device Device { get { return device; } }
+#endif
+
+        #endregion
+
+        #region ================== Properties
+
+#if Windows // check if we're building for Windows, the Redmond Whore's lair.
+
+        internal Device Device { get { return device; } }
 		public bool IsDisposed { get { return isdisposed; } }
 		public static bool IsRendering { get { return isrendering; } } //mxd
 		internal RenderTargetControl RenderTarget { get { return rendertarget; } }
@@ -80,13 +110,28 @@ namespace CodeImp.DoomBuilder.Rendering
 		internal Surface DepthBuffer { get { return depthbuffer; } }
 		internal Filter PostFilter { get { return postfilter; } }
 		internal Filter MipGenerateFilter { get { return mipgeneratefilter; } }
-		
-		#endregion
 
-		#region ================== Constructor / Disposer
+#else // For the other systems that don't have a virtual whore inside.
 
-		// Constructor
-		internal D3DDevice(RenderTargetControl rendertarget)
+        internal GraphicsDevice Device { get { return device; } }
+        public bool IsDisposed { get { return isdisposed; } }
+        public static bool IsRendering { get { return isrendering; } } //mxd
+        internal RenderTargetControl RenderTarget { get { return rendertarget; } }
+        internal Viewport Viewport { get { return viewport; } }
+        internal ShaderManager Shaders { get { return shaders; } }
+        internal Surface BackBuffer { get { return backbuffer; } }
+        internal Surface DepthBuffer { get { return depthbuffer; } }
+        internal Filter PostFilter { get { return postfilter; } }
+        internal Filter MipGenerateFilter { get { return mipgeneratefilter; } }
+
+#endif
+
+        #endregion
+
+        #region ================== Constructor / Disposer
+
+        // Constructor
+        internal D3DDevice(RenderTargetControl rendertarget)
 		{
 			// Set render target
 			this.rendertarget = rendertarget;
@@ -136,9 +181,9 @@ namespace CodeImp.DoomBuilder.Rendering
 			}
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Renderstates
+#region ================== Renderstates
 
 		// This completes initialization after the device has started or has been reset
 		public void SetupSettings()
@@ -206,9 +251,9 @@ namespace CodeImp.DoomBuilder.Rendering
 			Presentation.Initialize();
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Initialization
+#region ================== Initialization
 		
 		// This starts up Direct3D
 		public static void Startup()
@@ -344,9 +389,9 @@ namespace CodeImp.DoomBuilder.Rendering
 			return displaypp;
 		}
 		
-		#endregion
+#endregion
 
-		#region ================== Resetting
+#region ================== Resetting
 
 		// This registers a resource
 		internal void RegisterResource(ID3DResource res)
@@ -414,9 +459,9 @@ namespace CodeImp.DoomBuilder.Rendering
 			return true;
 		}
 
-        #endregion
+#endregion
 
-        #region ================== Rendering
+#region ================== Rendering
 
 		// This begins a drawing session
 		public bool StartRendering(bool clear, Color4 backcolor, Surface target, Surface depthbuffer)
@@ -548,9 +593,9 @@ namespace CodeImp.DoomBuilder.Rendering
 			}
 		}
 		
-		#endregion
+#endregion
 
-		#region ================== Tools
+#region ================== Tools
 
 		// Make a color from ARGB
 		public static int ARGB(float a, float r, float g, float b)
@@ -588,6 +633,7 @@ namespace CodeImp.DoomBuilder.Rendering
 			return new Vector2D(v2.X, v2.Y);
 		}
 
-		#endregion
+
+#endregion
 	}
 }

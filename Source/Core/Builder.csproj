@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{818B3D10-F791-4C3F-9AF5-BB2D0079B63C}</ProjectGuid>
@@ -611,7 +611,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -621,6 +620,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="TabControlEX, Version=0.0.3271.41578, Culture=neutral, PublicKeyToken=1db242dc828e4b4e">
       <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoGame.Forms.GL">
+      <HintPath>..\..\packages\MonoGame.Forms.GL.2.3.8\lib\net451\MonoGame.Forms.GL.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\packages\MonoGame.Forms.GL.2.3.8\lib\net451\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -684,6 +689,11 @@
     <None Include="Resources\SaveMap.png" />
     <None Include="Resources\OpenMap.png" />
     <None Include="Resources\NewMap.png" />
+    <None Include="x86\soft_oal.dll" />
+    <None Include="x86\SDL2.dll" />
+    <None Include="x64\soft_oal.dll" />
+    <None Include="x64\SDL2.dll" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Windows\ActionBrowserForm.resx">
