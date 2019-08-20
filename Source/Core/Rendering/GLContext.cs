@@ -40,7 +40,7 @@ namespace CodeImp.DoomBuilder.Rendering
 
         #endregion
 
-        private ProbeExtensions()
+        private void ProbeExtensions()
         {
             //TODO: write GL extension probe
         }

@@ -30,7 +30,7 @@ float4 rendersettings;
 float4x4 transformsettings;
 
 // Filter settings
-dword filtersettings; // [gdm413229] That is a 32-bit int, I presume.
+dword filtersettings; // [gdm413229] That is a 32-bit uint, I presume.
 
 //
 float desaturation;

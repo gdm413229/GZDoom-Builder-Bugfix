@@ -33,8 +33,6 @@ in vec4 g413229_gl_vertcol; // x = red, y = green, z = blue, w = alpha
 uniform sampler2D texture0;
 attribute vec4 gl_Color;
 
-const vec4 grey=(0.5,0.5,0.5,1.0);
-
 /* Render settings
  * x = texel width
  * y = texel height
@@ -45,7 +43,7 @@ uniform sampler2D mrt_thirdbuf; // may need triple buffering!
 
 uniform vec4 rendersettings;
 
-uniform mat4 transformsettings;
+uniform float desaturation;
 
 vec4 addcolor(vec4 lhs, vec4 rhs)
 {
@@ -58,9 +56,18 @@ vec4 addcolor(vec4 lhs, vec4 rhs)
 	return dst;
 }
 
+vec4 desaturate(vec3 rgbtexel)
+{
+	float gzgrey=(rgbtexel.x*0.3 + rgbtexel.y * 0.56 + rgbtexel.z * 0.14);
+	return mix(rgbtexel,vec3(gzgrey,gzgrey,gzgrey),desaturation);
+}
+
 void main() 
 {
+	vec2 scr_fragcoord = 1 - gl_FragPosition;
+	
 	vec4 c = texture2D(texture0,413229_gl_uvs);
+	vec4 curfrag = texture2D(mrt_thirdbuf,scr_fragcoord.xy);
 	
 	if(c.w < 0.1f){
 		vec4 mixedcol = (0,0,0,0);
@@ -69,7 +76,7 @@ void main()
 		mixedcol = addcolor(mixedcol,texture2D(texture0, vec2(g413229_gl_uvs.x,g413229_gl_uvs.y+rendersettings.y)));
 		mixedcol = addcolor(mixedcol,texture2D(texture0, vec2(g413229_gl_uvs.x,g413229_gl_uvs.y-rendersettings.y)));
 				
-		gl_FragColor=desaturate(c.xyz,c.w*rendersettings.w)*texture2D(mrt_thirdbuf,gl_FragCoord.xy); // best used with multiplicative blending!
+		gl_FragColor=vec4(desaturate(c.xyz), c.w*rendersettings.w *curfrag); // best used with multiplicative blending!
 	}
-	else gl_FragColor = ;
+	else gl_FragColor = vec4(desaturate(c.xyz),c.w*rendersettings.w)*curfrag;
 }

@@ -11,4 +11,9 @@
 		<compile type=vert>./Resources/gl_2dxform.vert</compile>
 		<compile type=frag>./Resources/gl_disp2d_fullbrt.frag</compile>
 	</pass>
+	<blendstate>
+		<srcfunc>GL_SRC_ALPHA</srcfunc>
+		<dstfunc>GL_ONE_MINUS_DST_ALPHA</dstfunc>
+		<equation>GL_FUNC_ADD</equation>
+	</blendstate>
 </413229_glfx>

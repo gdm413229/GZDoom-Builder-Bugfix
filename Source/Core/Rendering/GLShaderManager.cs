@@ -28,14 +28,45 @@ namespace CodeImp.DoomBuilder.Rendering
         private GLThings2DShader things2dshader;
         private GLWorld3DShader world3dshader;
 
+        private GLContext context;
+
         internal GLContext context { get { return context; } }
 
-        public GLShaderManager()
+
+        // Direct3D has its devices and GL has its contexts.
+        public GLShaderManager(GLContext context)
         {
+            this.context = context;
 
-
+            GC.SuppressFinalize(this);
         }
 
+        // The bin man!
+        public void Dispose() 
+        {
+            if(!isdisposed)
+            {
+
+                this.context = null;
+                this.isdisposed = true;
+            }
+        }
+
+        public void UnloadResource()
+        {
+            display2dshader.Dispose();
+            things2dshader.Dispose();
+            world3dshader.Dispose();
+        }
+
+        // Load resources
+        public void ReloadResource()
+        {
+            // Initialize effects
+            display2dshader = new Display2DShader(this);
+            things2dshader = new Things2DShader(this);
+            world3dshader = new World3DShader(this);
+        }
 
 
     }
