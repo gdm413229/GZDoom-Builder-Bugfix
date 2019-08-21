@@ -18,16 +18,21 @@ namespace CodeImp.DoomBuilder.Controls
 {
 	public partial class ArgumentsControl : UserControl
 	{
-		#region ================== Native stuff
+        #region ================== Native stuff
 
-		[DllImport("user32.dll")]
+#if Windows
+
+        [DllImport("user32.dll")]
 		private static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
 		
 		private const int WM_SETREDRAW = 11;
 
-		#endregion
+#else 
+        // FIXME: track down a Linux equivalent to user32.dll!
 
-		#region ================== Enums
+#endregion
+
+#region ================== Enums
 
 		private enum ArgZeroMode
 		{
@@ -36,9 +41,9 @@ namespace CodeImp.DoomBuilder.Controls
 			STRING,
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Variables
+#region ================== Variables
 
 		private string arg0strval;
 		private bool havearg0str;
@@ -55,9 +60,9 @@ namespace CodeImp.DoomBuilder.Controls
             }
         }
 
-		#endregion
+#endregion
 
-		#region ================== Constructor
+#region ================== Constructor
 
 		public ArgumentsControl()
 		{
@@ -66,9 +71,9 @@ namespace CodeImp.DoomBuilder.Controls
             Reset();
 		}
 
-        #endregion
+#endregion
 
-        #region ================== Setup
+#region ================== Setup
 
         public void Reset()
         {
@@ -126,9 +131,9 @@ namespace CodeImp.DoomBuilder.Controls
 			}
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Apply
+#region ================== Apply
 
 		public void Apply(Linedef l, int step)
 		{
@@ -238,9 +243,9 @@ namespace CodeImp.DoomBuilder.Controls
 			t.Args[4] = arg4.GetResult(t.Args[4], step);
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Update
+#region ================== Update
 
 		public void UpdateAction(int action, bool setuponly)
 		{
@@ -491,9 +496,9 @@ namespace CodeImp.DoomBuilder.Controls
 			return haveusedargs;
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Redraw control
+#region ================== Redraw control
 
 		private void BeginUpdate()
 		{
@@ -506,9 +511,9 @@ namespace CodeImp.DoomBuilder.Controls
 			this.Parent.Refresh();
 		}
 
-		#endregion
+#endregion
 
-		#region ================== Events
+#region ================== Events
 
 		private void cbuseargstr_CheckedChanged(object sender, EventArgs e)
 		{
@@ -557,7 +562,7 @@ namespace CodeImp.DoomBuilder.Controls
 			UpdateScriptArguments(item);
 		}
 
-        #endregion
+#endregion
 
         private void scriptnames_TextChanged(object sender, EventArgs e)
         {

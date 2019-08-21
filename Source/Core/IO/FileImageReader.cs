@@ -77,9 +77,11 @@ namespace CodeImp.DoomBuilder.IO
 
     internal unsafe class FileImageReader : IImageReader
 	{
-		#region ================== APIs
+        #region ================== APIs
 
-		[DllImport("devil.dll")]
+#if Windows
+
+        [DllImport("devil.dll")]
 		private static extern void ilGenImages(int num, IntPtr images);
 
 		[DllImport("devil.dll")]
@@ -102,23 +104,50 @@ namespace CodeImp.DoomBuilder.IO
 
 		[DllImport("devil.dll")]
 		private static extern uint ilCopyPixels(uint xoff, uint yoff, uint zoff, uint width, uint height, uint depth, uint format, uint type, IntPtr data);
-		
-		//mxd. Look's like we don't need many of those...
-		//  Matches OpenGL's right now.
-		//! Data formats \link Formats Formats\endlink
-		//private const int IL_COLOUR_INDEX     = 0x1900;
-		//private const int IL_COLOR_INDEX      = 0x1900;
-		//private const int IL_ALPHA			= 0x1906;
-		//private const int IL_RGB              = 0x1907;
-		//private const int IL_RGBA             = 0x1908;
+
+#else
+
+        [DllImport("libIL")]
+        private static extern void ilGenImages(int num, IntPtr images);
+
+        [DllImport("libIL")]
+        private static extern void ilBindImage(uint image);
+
+        [DllImport("libIL")]
+        private static extern void ilDeleteImages(int num, IntPtr images);
+
+        [DllImport("libIL")]
+        private static extern bool ilLoadL(uint type, IntPtr lump, uint size);
+
+        [DllImport("libIL")]
+        private static extern int ilGetInteger(uint mode);
+
+        [DllImport("libIL")]
+        private static extern int ilGetError();
+
+        [DllImport("libIL")]
+        private static extern int ilConvertImage(uint destformat, uint desttype);
+
+        [DllImport("libIL")]
+        private static extern uint ilCopyPixels(uint xoff, uint yoff, uint zoff, uint width, uint height, uint depth, uint format, uint type, IntPtr data);
+
+        //mxd. Look's like we don't need many of those...
+        // [gdm413229] We now need the IL_RGBA format due to the GL-ification process!
+        //  Matches OpenGL's right now.
+        //! Data formats \link Formats Formats\endlink
+        //private const int IL_COLOUR_INDEX     = 0x1900;
+        //private const int IL_COLOR_INDEX      = 0x1900;
+        //private const int IL_ALPHA			= 0x1906;
+        //private const int IL_RGB              = 0x1907;
+        private const int IL_RGBA             = 0x1908; // For GL.  SGI .rgb pixel format!
 		//private const int IL_BGR              = 0x80E0;
-		private const int IL_BGRA             = 0x80E1;
+		private const int IL_BGRA             = 0x80E1; // For D3D or GL with the GL_EXT_bgra extension.  Windows BMP pixel format!
 		//private const int IL_LUMINANCE        = 0x1909;
 		//private const int IL_LUMINANCE_ALPHA  = 0x190A;
 
 		//! Data types \link Types Types\endlink
 		//private const int IL_BYTE           = 0x1400;
-		private const int IL_UNSIGNED_BYTE  = 0x1401;
+		private const int IL_UNSIGNED_BYTE  = 0x1401; // For both D3D and GL
 		/*private const int IL_SHORT          = 0x1402;
 		private const int IL_UNSIGNED_SHORT = 0x1403;
 		private const int IL_INT            = 0x1404;
@@ -388,9 +417,9 @@ namespace CodeImp.DoomBuilder.IO
         private readonly Playpal guesspalette;
         private IImageReader proxyreader;
 		
-		#endregion
+#endregion
 
-		#region ================== Constructor / Disposer
+#region ================== Constructor / Disposer
 
 		// Constructor
 		public FileImageReader()
@@ -421,9 +450,9 @@ namespace CodeImp.DoomBuilder.IO
             GC.SuppressFinalize(this);
         }
 
-		#endregion
+#endregion
 
-		#region ================== Methods
+#region ================== Methods
 
 		// This creates a Bitmap from the given data
 		// Returns null on failure
@@ -683,6 +712,6 @@ namespace CodeImp.DoomBuilder.IO
             return true;
         }
 		
-		#endregion
+#endregion
 	}
 }
