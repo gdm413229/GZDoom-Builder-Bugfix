@@ -48,16 +48,25 @@ namespace CodeImp.DoomBuilder
 {
 	public static class General
 	{
-		#region ================== API Declarations
+        #region ================== API Declarations
 
-		[DllImport("devil.dll")]
+#if Windows
+
+        [DllImport("devil.dll")]
 		private static extern void ilInit();
 
-		//[DllImport("user32.dll")]
-		//internal static extern bool LockWindowUpdate(IntPtr hwnd);
+#else
 
-		//[DllImport("kernel32.dll", EntryPoint = "RtlZeroMemory", SetLastError = false)]
-		//internal static extern void ZeroMemory(IntPtr dest, int size);
+        [DllImport("libIL")]
+        private static extern void ilInit();
+
+#endif
+
+        //[DllImport("user32.dll")]
+        //internal static extern bool LockWindowUpdate(IntPtr hwnd);
+
+        //[DllImport("kernel32.dll", EntryPoint = "RtlZeroMemory", SetLastError = false)]
+        //internal static extern void ZeroMemory(IntPtr dest, int size);
         internal static void ZeroMemory(IntPtr dest, int size)
         {
             unsafe
@@ -99,18 +108,18 @@ namespace CodeImp.DoomBuilder
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		private static extern uint GetShortPathName([MarshalAs(UnmanagedType.LPTStr)] string longpath, [MarshalAs(UnmanagedType.LPTStr)]StringBuilder shortpath, uint buffersize);
 #endif
-		//[DllImport("user32.dll")]
-		//internal static extern int SetScrollInfo(IntPtr windowptr, int bar, IntPtr scrollinfo, bool redraw);
+        //[DllImport("user32.dll")]
+        //internal static extern int SetScrollInfo(IntPtr windowptr, int bar, IntPtr scrollinfo, bool redraw);
 
-		//[DllImport("user32.dll")]
-		//internal static extern int GetScrollInfo(IntPtr windowptr, int bar, IntPtr scrollinfo);
+        //[DllImport("user32.dll")]
+        //internal static extern int GetScrollInfo(IntPtr windowptr, int bar, IntPtr scrollinfo);
 
-#endregion
+        #endregion
 
-#region ================== Constants
+        #region ================== Constants
 
-		// SendMessage API
-		internal const int WM_USER = 0x400;
+        // SendMessage API
+        internal const int WM_USER = 0x400;
 		internal const int WM_SYSCOMMAND = 0x112;
         internal const int WM_MOUSEHWHEEL = 0x020E; // [ZZ]
         internal const int SC_KEYMENU = 0xF100;

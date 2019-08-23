@@ -25,16 +25,16 @@
 
 /* 2D xform shader translated from D3D9 SM2 HLSL :D */
 
-uniform vec3 VERTEX_POS; uniform vec2 VERTEX_UV;
+uniform vec2 VERTEX_POS; uniform vec2 VERTEX_UV;
 uniform vec4 VERTEX_COL;
-uniform mat4 VIEWXFRM_MAT;
+uniform mat3 VIEWXFRM_MAT; // This shader does a 2D transformation, so a 3x3 matrix is enough for the job.
 
-out vec2 413229_gl_uvs;
-out vec4 413229_gl_vertcol;
+out vec2 g413229_gl_uvs;
+out vec4 g413229_gl_vertcol;
 
 void main()
 {
+	g413229_gl_vertcol = VERTEX_COL;
+	g413229_gl_uvs = VERTEX_UV;
 	gl_Position = VERTEX_POS*VIEWXFRM_MAT; // Mul. that matrix!
-	413229_gl_vertcol = VERTEX_COL;
-	413229_gl_uvs = VERTEX_UV;
 }

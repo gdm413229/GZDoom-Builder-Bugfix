@@ -22,19 +22,22 @@ namespace CodeImp.DoomBuilder.Controls
 
 #if Windows
 
+        // [gdm413229] For the Windows builds.
         [DllImport("user32.dll")]
 		private static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
 		
 		private const int WM_SETREDRAW = 11;
 
-#else 
-        // FIXME: track down a Linux equivalent to user32.dll!
+#else
+        [DllImport("X11")] // could be the POSIX lib containing the SendMessage() equivalent
+        private static extern int XSendEvent(Display display,Window w,bool propagate,uint event_mask,XEvent event_send);
+#endif
 
 #endregion
 
-#region ================== Enums
+        #region ================== Enums
 
-		private enum ArgZeroMode
+        private enum ArgZeroMode
 		{
 			DEFAULT,
 			INT,

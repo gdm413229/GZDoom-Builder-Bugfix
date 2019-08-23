@@ -106,7 +106,7 @@ float4 ps_thing(PixelData pd) : COLOR
 //mxd. Pretty darn simple pixel shader for wireframe rendering :)
 float4 ps_fill(PixelData pd) : COLOR 
 {
-	return fillColor;
+	return fillColor; // [gdm413229] Just a pass-thru shader, nuff said!
 }
 
 // Technique for shader model 2.0

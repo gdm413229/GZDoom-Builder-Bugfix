@@ -29,6 +29,7 @@ namespace CodeImp.DoomBuilder.Controls
 	{
 		#region ================== API Declarations
 
+        // FIXME: add XCB/Xlib equivalent of this declaration
 		[DllImport("user32.dll")]
 		private static extern int SendMessage(IntPtr window, int message, int wParam, ref LVGROUP lParam);
 

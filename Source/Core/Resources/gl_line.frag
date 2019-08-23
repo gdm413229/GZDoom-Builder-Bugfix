@@ -23,39 +23,13 @@
  * 
  */
 
-/* Display2D GL shader : Normal [without antialiasing!] drawing */
+/* Things2D GL shader : Line drawing fragment pass-thru shader, now GLSL-ified! */
 
-in vec2 g413229_gl_uvs;
 in vec4 g413229_gl_vertcol; // x = red, y = green, z = blue, w = alpha
 
-uniform sampler2D texture0;
-attribute vec4 gl_Color;
 
-/* Render settings
- * x = texel width
- * y = texel height
- * z = FSAA blend fac
- * w = transparency/opacity */
- 
-uniform sampler2D mrt_thirdbuf; // may need triple buffering!
-
-uniform vec4 rendersettings;
-
-uniform float desaturation;
-
-// Ported from ZZYZX's HLSL shader code
-vec4 desaturate(vec3 rgbtexel)
+// GLSL frag. shader port of m-x-d's ps_fill HLSL pixel shader
+void main()
 {
-	float gzgrey=(rgbtexel.x*0.3 + rgbtexel.y * 0.56 + rgbtexel.z * 0.14);
-	return mix(rgbtexel,vec3(gzgrey,gzgrey,gzgrey),desaturation);
-}
-
-void main() 
-{
-	vec2 scr_fragcoord = (gl_FragPosition.x,1-gl_FragPosition.y); // Y flip that buffer!
-	
-	vec4 c = texture2D(texture0,413229_gl_uvs);
-	vec4 curfrag = texture2D(mrt_thirdbuf,scr_fragcoord.xy);
-			
-	gl_FragColor = vec4(desaturate(c.xyz),c.w*rendersettings.w)*curfrag;
+	gl_FragColor=g413229_gl_vertcol; // Pass that vertex color through!
 }

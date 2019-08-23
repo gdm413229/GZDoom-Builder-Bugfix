@@ -44,6 +44,8 @@ namespace CodeImp.DoomBuilder.BuilderModes
 {
 	public class BuilderPlug : Plug
 	{
+
+        // ＦＩＸＭＥ：　make a POSIX equivalent of this class.
 		#region ================== API Declarations
 
 		[DllImport("user32.dll")]

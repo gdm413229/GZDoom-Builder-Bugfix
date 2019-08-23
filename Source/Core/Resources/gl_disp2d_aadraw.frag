@@ -56,6 +56,7 @@ vec4 addcolor(vec4 lhs, vec4 rhs)
 	return dst;
 }
 
+// Ported from ZZYZX's HLSL shader code
 vec4 desaturate(vec3 rgbtexel)
 {
 	float gzgrey=(rgbtexel.x*0.3 + rgbtexel.y * 0.56 + rgbtexel.z * 0.14);
@@ -64,7 +65,7 @@ vec4 desaturate(vec3 rgbtexel)
 
 void main() 
 {
-	vec2 scr_fragcoord = 1 - gl_FragPosition;
+	vec2 scr_fragcoord = (gl_FragPosition.x,1-gl_FragPosition.y); // Y flip that buffer!
 	
 	vec4 c = texture2D(texture0,413229_gl_uvs);
 	vec4 curfrag = texture2D(mrt_thirdbuf,scr_fragcoord.xy);

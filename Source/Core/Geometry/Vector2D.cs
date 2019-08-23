@@ -263,7 +263,7 @@ namespace CodeImp.DoomBuilder.Geometry
 			return angle;
 		}
 
-		// This calculates the length
+		// This calculates the length [Euclidean distance]
 		public float GetLength()
 		{
 			// Calculate and return the length
@@ -283,6 +283,8 @@ namespace CodeImp.DoomBuilder.Geometry
 			// Calculate and return the length
 			return Math.Abs(x) + Math.Abs(y);
 		}
+
+        // [gdm413229] TODO: Chebyshev distance function
 
 		// This returns a normalized vector
 		public Vector2D GetNormal()

@@ -9,8 +9,10 @@ namespace CodeImp.DoomBuilder.Controls
 {
 	public class BufferedTreeView : TreeView
 	{
-		// Pinvoke:
-		private const int TVM_SETEXTENDEDSTYLE = 0x1100 + 44;
+
+#if Windows
+        // Pinvoke:
+        private const int TVM_SETEXTENDEDSTYLE = 0x1100 + 44;
 		//private const int TVM_GETEXTENDEDSTYLE = 0x1100 + 45;
 		private const int TVS_EX_DOUBLEBUFFER = 0x0004;
 
@@ -23,5 +25,10 @@ namespace CodeImp.DoomBuilder.Controls
 			SendMessage(this.Handle, TVM_SETEXTENDEDSTYLE, (IntPtr)TVS_EX_DOUBLEBUFFER, (IntPtr)TVS_EX_DOUBLEBUFFER);
 			base.OnHandleCreated(e);
 		}
+
+#else
+        // FIXME: search for a Linux equivalent to the double buffered tree view control for WinForms.
+
+        // May involve the use of X11 bitmap fonts and OpenGL just to smash the Windows chains with Thor's hammer.
 	}
 }

@@ -5,8 +5,6 @@ namespace CodeImp.DoomBuilder.Rendering
     internal class GLBlendState
     {
 
-        // TODO: add blend presets.
-
         /* Suctractive is glBlendFunc(GL_ONE,GL_ONE) with glBlendEquation(GL_FUNC_SUBTRACT)
          * Additive is glBlendFunc(GL_ONE,GL_ONE) with glBlendEquation(GL_FUNC_ADD)
          * DOOM invulnerability is possibly glBlendFunc(GL_ONE_MINUS_SRC_COLOR,GL_ONE) */
