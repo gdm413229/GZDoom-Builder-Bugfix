@@ -27,7 +27,6 @@
 
 in vec4 g413229_gl_vertcol; // x = red, y = green, z = blue, w = alpha
 
-
 // GLSL frag. shader port of m-x-d's ps_fill HLSL pixel shader
 void main()
 {

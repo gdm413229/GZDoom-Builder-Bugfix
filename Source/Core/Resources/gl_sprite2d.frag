@@ -36,7 +36,7 @@ uniform vec4 rendersettings;
 
 uniform float desaturation;
 
-// Ported from ZZYZX's HLSL shader code
+// Ported from ZZYZX's HLSL shader code (from GLSL to HLSL and back to GLSL.)
 vec4 desaturate(vec3 rgbtexel)
 {
 	float gzgrey=(rgbtexel.x*0.3 + rgbtexel.y * 0.56 + rgbtexel.z * 0.14);
@@ -45,14 +45,18 @@ vec4 desaturate(vec3 rgbtexel)
 
 void main()
 {
-	vec2 scr_fragcoord = (gl_FragPosition.x,1-gl_FragPosition.y); // Y flip that buffer!
+	vec2 scr_fragcoord = vec2(gl_FragPosition.x,1-gl_FragPosition.y); // Y flip that buffer!
 	
 	vec4 c=texture2D(texture0,g413229_gl_uvs);
 	vec4 curfrag=texture2D(mrt_thirdbuf,scr_fragcoord); // get current fragment's color
+	
+	// Modulate it by the selection color
 	if(curfrag.w>0)
 	{
-		
+		vec3 cr=desaturate(c.xyz);
+		gl_FragColor=vec4((cr.x+curfrag.x)/2.0f,(cr.y+curfrag.y)/2.0f,(cr.z+curfrag.z)/2.0f,c.w*rendersettings.w*curfrag.w);
 	}
 	
-	gl_FragColor=vec2(desaturate(c.xyz),c.w*rendersettings.w);
+	// Or leave the color as is
+	gl_FragColor=vec4(desaturate(c.xyz),c.w*rendersettings.w)*curfrag;
 }
