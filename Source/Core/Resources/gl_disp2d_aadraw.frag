@@ -57,7 +57,7 @@ vec4 addcolor(vec4 lhs, vec4 rhs)
 }
 
 // Ported from ZZYZX's HLSL shader code
-vec4 desaturate(vec3 rgbtexel)
+vec3 desaturate(vec3 rgbtexel)
 {
 	float gzgrey=(rgbtexel.x*0.3 + rgbtexel.y * 0.56 + rgbtexel.z * 0.14);
 	return mix(rgbtexel,vec3(gzgrey,gzgrey,gzgrey),desaturation);

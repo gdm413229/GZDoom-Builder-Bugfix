@@ -37,7 +37,7 @@ uniform vec4 rendersettings;
 uniform float desaturation;
 
 // Ported from ZZYZX's HLSL shader code (from GLSL to HLSL and back to GLSL.)
-vec4 desaturate(vec3 rgbtexel)
+vec3 desaturate(vec3 rgbtexel)
 {
 	float gzgrey=(rgbtexel.x*0.3 + rgbtexel.y * 0.56 + rgbtexel.z * 0.14);
 	return mix(rgbtexel,vec3(gzgrey,gzgrey,gzgrey),desaturation); // Think of this line like Blender Cycles' MixRGB node.
