@@ -28,8 +28,6 @@
     <li>7-zip archiver (<a href="www.7-zip.org">www.7-zip.org</a>).</li>
     <li>Inno Setup 5 or newer (<a href="http://www.jrsoftware.org/isinfo.php">http://www.jrsoftware.org/isinfo.php</a>).</li>
     <li>Microsoft HTML Help compiler (<a href="http://www.microsoft.com/en-us/download/details.aspx?id=21138">http://www.microsoft.com/en-us/download/details.aspx?id=21138</a>).</li>
-    <li>SlimDX Developer SDK (<a href="http://slimdx.org/download.php">http://slimdx.org/download.php</a>).</li>
-    <li>DirectX SDK (<a href="https://www.microsoft.com/en-us/download/details.aspx?id=6812">https://www.microsoft.com/en-us/download/details.aspx?id=6812</a>).</li>
   </ul>
   
   <h2>Obtaining the source:</h2>
@@ -41,7 +39,6 @@
     <li>Enter &quot;<strong>https://github.com/m-x-d/GZDoom-Builder.git</strong>&quot; in the &quot;<strong>URL</strong>&quot; field, click OK and wait for the source to download.</li>
     <li> Open &quot;<strong>Builder.sln</strong>&quot; in the Visual Studio and make sure it compiles and runs (click the green &quot;<strong>Play</strong>&quot; button, or press <strong>F5</strong>).
       <ul>
-      <li>If the Visual Studio complains about missing <strong>SlimDX</strong> reference in the Builder project, you'll need to re-add it manually. To do so, delete SlimDX from the References in the Solution Explorer, right click on the Builder project and choose &quot;<strong>Add reference</strong>&quot;. On the .NET tab, choose SlimDX (.net 2.0, x86 version).</li>
       <li>You can ignore the warning about missing <strong>JetBrains.Profiler.Core.Api</strong> reference. Everything should build fine, unless you choose a   profiler-enabled build target (or you can use dotTrace Performance, if   you have access to it).</li>
       </ul>
     </li>
