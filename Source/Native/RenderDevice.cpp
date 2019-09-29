@@ -42,6 +42,13 @@ RenderDevice::~RenderDevice()
 	}
 }
 
+void RenderDevice::DeclareShader(ShaderName shadername, const char *vertexshader, const char *fragmentshader)
+{
+	if (!mContextIsCurrent) Context->MakeCurrent();
+	mShaderManager->DeclareShader(shadername, vertexshader, fragmentshader);
+	if (!mContextIsCurrent) Context->ClearCurrent();
+}
+
 void RenderDevice::SetVertexBuffer(VertexBuffer* buffer)
 {
 	if (mVertexBuffer != buffer)
@@ -638,6 +645,11 @@ RenderDevice* RenderDevice_New(void* disp, void* window)
 void RenderDevice_Delete(RenderDevice* device)
 {
 	delete device;
+}
+
+void RenderDevice_DeclareShader(RenderDevice* device, ShaderName name, const char* vertexshader, const char* fragmentshader)
+{
+	device->DeclareShader(name, vertexshader, fragmentshader);
 }
 
 void RenderDevice_SetShader(RenderDevice* device, ShaderName name)
