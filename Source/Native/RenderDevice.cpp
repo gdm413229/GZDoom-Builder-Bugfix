@@ -9,8 +9,6 @@
 
 RenderDevice::RenderDevice(void* disp, void* window)
 {
-	memset(mUniforms, 0, sizeof(mUniforms));
-
 	Context = IOpenGLContext::Create(disp, window);
 	if (Context)
 	{
@@ -40,6 +38,21 @@ RenderDevice::~RenderDevice()
 		mShaderManager->ReleaseResources();
 		Context->ClearCurrent();
 	}
+}
+
+void RenderDevice::DeclareUniform(UniformName name, const char* variablename, UniformType type)
+{
+	static const size_t typeCount[] = { 4, 3, 2, 1, 16 };
+
+	if (mUniforms.size() <= (size_t)name)
+		mUniforms.resize((size_t)name + 1);
+
+	UniformDecl& decl = mUniforms[name];
+	decl.name = variablename;
+	decl.type = type;
+	decl.offset = mUniformData.size();
+
+	mUniformData.resize(mUniformData.size() + typeCount[(int)type]);
 }
 
 void RenderDevice::DeclareShader(ShaderName shadername, const char *vertexshader, const char *fragmentshader)
@@ -429,32 +442,9 @@ void RenderDevice::SetShader(ShaderName name)
 	}
 }
 
-static const int uniformLocations[(int)UniformName::NumUniforms] = {
-	64, // rendersettings
-	0, // projection
-	108, // desaturation
-	80, // highlightcolor
-	16, // view
-	32, // world
-	48, // modelnormal
-	68, // FillColor
-	72, // vertexColor
-	84, // stencilColor
-	92, // lightPosAndRadius
-	96, // lightOrientation
-	100, // light2Radius
-	104, // lightColor
-	109, // ignoreNormals
-	110, // spotLight
-	76, // campos,
-	112, // texturefactor
-	116, // fogsettings
-	120, // fogcolor
-};
-
 void RenderDevice::SetUniform(UniformName name, const void* values, int count)
 {
-	auto dest = &mUniforms[uniformLocations[(int)name]];
+	auto dest = &mUniformData[mUniforms[name].offset];
 	if (memcmp(dest, values, sizeof(float) * count) != 0)
 	{
 		memcpy(dest, values, sizeof(float) * count);
@@ -487,7 +477,7 @@ void RenderDevice::ApplyChanges()
 
 void RenderDevice::ApplyShader()
 {
-	GetActiveShader()->Bind();
+	GetActiveShader()->Bind(mUniforms);
 	mShaderChanged = false;
 }
 
@@ -569,32 +559,28 @@ void RenderDevice::ApplyVertexBuffer()
 void RenderDevice::ApplyUniforms()
 {
 	Shader* shader = GetActiveShader();
-	auto& locations = shader->UniformLocations;
+	const auto& locations = shader->UniformLocations;
 
-	glUniformMatrix4fv(locations[(int)UniformName::projection], 1, GL_FALSE, &mUniforms[0].valuef);
-	glUniformMatrix4fv(locations[(int)UniformName::view], 1, GL_FALSE, &mUniforms[16].valuef);
-	glUniformMatrix4fv(locations[(int)UniformName::world], 1, GL_FALSE, &mUniforms[32].valuef);
-	glUniformMatrix4fv(locations[(int)UniformName::modelnormal], 1, GL_FALSE, &mUniforms[48].valuef);
-
-	glUniform4fv(locations[(int)UniformName::rendersettings], 1, &mUniforms[64].valuef);
-	glUniform4fv(locations[(int)UniformName::FillColor], 1, &mUniforms[68].valuef);
-	glUniform4fv(locations[(int)UniformName::vertexColor], 1, &mUniforms[72].valuef);
-	glUniform4fv(locations[(int)UniformName::campos], 1, &mUniforms[76].valuef);
-	glUniform4fv(locations[(int)UniformName::highlightcolor], 1, &mUniforms[80].valuef);
-	glUniform4fv(locations[(int)UniformName::stencilColor], 1, &mUniforms[84].valuef);
-	glUniform4fv(locations[(int)UniformName::lightColor], 1, &mUniforms[88].valuef);
-	glUniform4fv(locations[(int)UniformName::lightPosAndRadius], 1, &mUniforms[92].valuef);
-	glUniform3fv(locations[(int)UniformName::lightOrientation], 1, &mUniforms[96].valuef);
-	glUniform2fv(locations[(int)UniformName::light2Radius], 1, &mUniforms[100].valuef);
-	glUniform4fv(locations[(int)UniformName::lightColor], 1, &mUniforms[104].valuef);
-
-	glUniform1fv(locations[(int)UniformName::desaturation], 1, &mUniforms[108].valuef);
-	glUniform1fv(locations[(int)UniformName::ignoreNormals], 1, &mUniforms[109].valuef);
-	glUniform1fv(locations[(int)UniformName::spotLight], 1, &mUniforms[110].valuef);
-
-	glUniform4fv(locations[(int)UniformName::texturefactor], 1, &mUniforms[112].valuef);
-	glUniform4fv(locations[(int)UniformName::fogsettings], 1, &mUniforms[116].valuef);
-	glUniform4fv(locations[(int)UniformName::fogcolor], 1, &mUniforms[120].valuef);
+	int i = 0;
+	for (const UniformDecl &decl : mUniforms)
+	{
+		CheckError();
+		uint32_t location = locations[i++];
+		if (location != 0xffffffff)
+		{
+			const GLfloat* data = &mUniformData[decl.offset];
+			switch (decl.type)
+			{
+			default:
+			case UniformType::Vec4: glUniform4fv(location, 1, data); break;
+			case UniformType::Vec3: glUniform3fv(location, 1, data); break;
+			case UniformType::Vec2: glUniform2fv(location, 1, data); break;
+			case UniformType::Float: glUniform1fv(location, 1, data); break;
+			case UniformType::Mat4: glUniformMatrix4fv(location, 1, GL_FALSE, data); break;
+			}
+		}
+		CheckError();
+	}
 
 	mUniformsChanged = false;
 }
@@ -645,6 +631,11 @@ RenderDevice* RenderDevice_New(void* disp, void* window)
 void RenderDevice_Delete(RenderDevice* device)
 {
 	delete device;
+}
+
+void RenderDevice_DeclareUniform(RenderDevice* device, UniformName name, const char* variablename, UniformType type)
+{
+	device->DeclareUniform(name, variablename, type);
 }
 
 void RenderDevice_DeclareShader(RenderDevice* device, ShaderName name, const char* vertexshader, const char* fragmentshader)

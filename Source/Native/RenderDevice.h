@@ -1,6 +1,7 @@
 #pragma once
 
 #include "OpenGLContext.h"
+#include <string>
 
 class VertexBuffer;
 class IndexBuffer;
@@ -20,30 +21,22 @@ enum class PrimitiveType : int { LineList, TriangleList, TriangleStrip };
 enum class TextureFilter : int { None, Point, Linear, Anisotropic };
 
 typedef int ShaderName;
+typedef int UniformName;
 
-enum class UniformName : int
+enum class UniformType : int
 {
-	rendersettings,
-	projection,
-	desaturation,
-	highlightcolor,
-	view,
-	world,
-	modelnormal,
-	FillColor,
-	vertexColor,
-	stencilColor,
-	lightPosAndRadius,
-	lightOrientation,
-	light2Radius,
-	lightColor,
-	ignoreNormals,
-	spotLight,
-	campos,
-	texturefactor,
-	fogsettings,
-	fogcolor,
-	NumUniforms
+	Vec4,
+	Vec3,
+	Vec2,
+	Float,
+	Mat4
+};
+
+struct UniformDecl
+{
+	std::string name;
+	UniformType type = {};
+	size_t offset = 0;
 };
 
 class RenderDevice
@@ -52,6 +45,7 @@ public:
 	RenderDevice(void* disp, void* window);
 	~RenderDevice();
 
+	void DeclareUniform(UniformName name, const char* variablename, UniformType type);
 	void DeclareShader(ShaderName shadername, const char* vertexshader, const char* fragmentshader);
 	void SetShader(ShaderName name);
 	void SetUniform(UniformName name, const void* values, int count);
@@ -123,13 +117,8 @@ public:
 	std::unique_ptr<ShaderManager> mShaderManager;
 	ShaderName mShaderName = {};
 
-	union UniformEntry
-	{
-		float valuef;
-		int32_t valuei;
-	};
-
-	UniformEntry mUniforms[4 * 16 + 15 * 4];
+	std::vector<float> mUniformData;
+	std::vector<UniformDecl> mUniforms;
 
 	GLuint mStreamVertexBuffer = 0;
 	GLuint mStreamVAO = 0;

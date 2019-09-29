@@ -11,12 +11,12 @@ public:
 	void ReleaseResources();
 
 	void Setup(const std::string& vertexShader, const std::string& fragmentShader, bool alphatest);
-	void Bind();
+	void Bind(const std::vector<UniformDecl> &uniforms);
 
-	GLuint UniformLocations[(int)UniformName::NumUniforms] = { 0 };
+	std::vector<GLuint> UniformLocations;
 
 private:
-	void CreateProgram();
+	void CreateProgram(const std::vector<UniformDecl>& uniforms);
 	GLuint CompileShader(const std::string& code, GLenum type);
 
 	std::string mVertexText;

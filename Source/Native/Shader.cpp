@@ -11,13 +11,13 @@ void Shader::Setup(const std::string& vertexShader, const std::string& fragmentS
 	mAlphatest = alphatest;
 }
 
-void Shader::Bind()
+void Shader::Bind(const std::vector<UniformDecl>& uniforms)
 {
 	bool firstCall = !mProgramBuilt;
 	if (firstCall)
 	{
 		mProgramBuilt = true;
-		CreateProgram();
+		CreateProgram(uniforms);
 	}
 
 	if (!mProgram)
@@ -31,7 +31,7 @@ void Shader::Bind()
 	}
 }
 
-void Shader::CreateProgram()
+void Shader::CreateProgram(const std::vector<UniformDecl>& uniforms)
 {
 	const char* prefixNAT = R"(
 		#version 150
@@ -81,32 +81,10 @@ void Shader::CreateProgram()
 		return;
 	}
 
-	static const char* names[(int)UniformName::NumUniforms] = {
-		"rendersettings",
-		"projection",
-		"desaturation",
-		"highlightcolor",
-		"view",
-		"world",
-		"modelnormal",
-		"fillColor",
-		"vertexColor",
-		"stencilColor",
-		"lightPosAndRadius",
-		"lightOrientation",
-		"light2Radius",
-		"lightColor",
-		"ignoreNormals",
-		"spotLight",
-		"campos",
-		"texturefactor",
-		"fogsettings",
-		"fogcolor"
-	};
-
-	for (int i = 0; i < (int)UniformName::NumUniforms; i++)
+	UniformLocations.resize(uniforms.size());
+	for (size_t i = 0; i < uniforms.size(); i++)
 	{
-		UniformLocations[i] = glGetUniformLocation(mProgram, names[i]);
+		UniformLocations[i] = glGetUniformLocation(mProgram, uniforms[i].name.c_str());
 	}
 }
 
