@@ -48,6 +48,12 @@ class RawMouse {
 
 	float GetX();
 	float GetY();
+	
+	private:
+	
+	int x=0; int y=0;
+
+	Display* disp=0; Window handle = 0; // Xlib display and window handles
 };
 
 #endif
