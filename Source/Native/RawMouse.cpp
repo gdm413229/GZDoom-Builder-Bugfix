@@ -2,6 +2,8 @@
 #include "Precomp.h"
 #include "RawMouse.h"
 
+#ifndef G413229_XLIB_RAWMOUSE // not using gdm413229's Xlib version of RawMouse?
+
 #ifdef WIN32
 
 #ifndef HID_USAGE_PAGE_GENERIC
@@ -144,6 +146,97 @@ float RawMouse::GetY()
 }
 
 #endif
+#endif
+
+#ifdef G413229_XLIB_RAWMOUSE
+
+// TODO: create Xlib version of RawMouse
+
+// [gdm413229] Xlib version of RawMouse, may grab the keyboard to ensure the menus don't unexpectedly pop up.
+
+class RawMouse
+{
+
+public:
+	RawMouse(void* ownerWindow);
+	~RawMouse();
+
+private:
+	// Cursor position
+	int x = 0;
+	int y = 0;
+
+	Display* disp=0; // Xlib display handle
+	Window handle=0; // Xlib window handle
+	const unsigned int grab_evmask = PointerMotionMask|ButtonMotionMask; // we want to get mouse delta-related events!
+
+private:
+	// Cursor grabber
+	inline void GrabCursor() {
+		XGrabPointer(disp,handle,0,grab_evmask,GrabModeSync,GrabModeSync,None,None,CurrentTime);
+		XFlush(handle);
+	}
+
+	// Cursor releaser
+	inline void UngrabCursor() {
+		XUngrabPointer(disp,CurrentTime);
+		XFlush(handle);
+	}
+
+	// Keyboard grabber, useful for making sure dem menus don't pop when users didn't mean to!
+	inline void GrabKeyboard() {
+		XGrabKeyboard(disp,handle,0,GrabModeSync,GrabModeSync,CurrentTime);
+		XFlush(handle);
+	}
+
+	// Keyboard releaser
+	inline void UngrabKeyboard() {
+		XUngrabKeyboard(disp,CurrentTime);
+		XFlush(handle);
+	}
+
+	// Cursor query wrapper
+
+	inline void QueryCursor() {
+		XQueryPointer(disp,handle,NULL,NULL,NULL,NULL,&this.x,&this.y,NULL); // not sure if WinForms cursor position is absolute (X display pos.) or relative (local pos. inside window)
+	}
+
+	inline void QueryCursorRelative() {
+		XQueryPointer(disp,handle,NULL,NULL,NULL,NULL,&this.x,&this.y,NULL); // not sure if WinForms cursor position is absolute (X display pos.) or relative (local pos. inside window)
+	}
+
+};
+
+RawMouse::RawMouse(void* ownerWindow) {
+	// ctor for Xlib RawMouse
+	this.disp=XOpenDisplay(NULL);
+
+	// checks if Xlib gave us a display handle.
+
+	if(this.disp == NULL) {
+		throw std::runtime_error(std::string("ＯＨ　▄█▀ █━█ █ ▀█▀！ Xlib refused to give us a display handle!"));
+	}
+	// TODO: negotiate with dpJudas for Xlib window handle retrieval from GL context holder
+}
+
+RawMouse::~RawMouse() {
+	XCloseDisplay(this.disp); // get rid of our redundant display handle
+	this.handle=0; // Nullify the window handle.
+}
+
+float RawMouse::GetX() {
+	QueryCursor();
+	XFlush(this.disp); // as a guarantee
+	return this.x;
+}
+
+float RawMouse::GetY() {
+	QueryCursor();
+	XFlush(this.disp); // as a guarantee
+	return this.y;
+}
+
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -170,4 +263,4 @@ float RawMouse_GetY(RawMouse* mouse)
 	return mouse->GetY();
 }
 
-}
+

@@ -11,6 +11,12 @@
 #undef max
 #endif
 
+// [gdm413229] for RawMouse on Linux
+
+#ifdef G413229_XLIB_RAWMOUSE
+#include <X11/Xlib.h> // for XWarpPointer and XQueryPointer
+#endif
+
 #include "gl_load/gl_system.h"
 
 #define APART(x) (static_cast<uint32_t>(x) >> 24)

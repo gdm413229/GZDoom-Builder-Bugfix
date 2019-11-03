@@ -383,6 +383,14 @@ public:
 
 class OpenGLContext : public IOpenGLContext
 {
+
+#ifdef G413229_XLIB_RAWMOUSE // Using gdm413229's Xlib RawMouse class?
+
+public:
+	::Display* shared_disp=nullptr; ::Window shared_win = 0; // my RawMouse implemention needs these shared handles!
+
+#endif
+
 public:
 	OpenGLContext(void* display, void* window);
 	~OpenGLContext();
