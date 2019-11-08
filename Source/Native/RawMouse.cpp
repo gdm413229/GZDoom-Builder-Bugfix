@@ -205,6 +205,10 @@ private:
 		XQueryPointer(disp,handle,NULL,NULL,NULL,NULL,&this.x,&this.y,NULL); // not sure if WinForms cursor position is absolute (X display pos.) or relative (local pos. inside window)
 	}
 
+	inline void DigestHWnd(void* win_hWnd, Display* dest_display,Window* dest_win) {
+		// TODO: create hWnd digester for Xlib RawMouse
+	}
+
 };
 
 RawMouse::RawMouse(void* ownerWindow) {
@@ -213,14 +217,21 @@ RawMouse::RawMouse(void* ownerWindow) {
 
 	// checks if Xlib gave us a display handle.
 
+	// TODO: figure out a way to turn a Win32 hWnd to Xlib display and window handles
+
 	if(this.disp == NULL) {
 		throw std::runtime_error(std::string("ＯＨ　▄█▀ █━█ █ ▀█▀！ Xlib refused to give us a display handle!"));
 	}
-	// TODO: negotiate with dpJudas for Xlib window handle retrieval from GL context holder
+	
+	this.handle=XCreateSimpleWindow(this.disp,
+                                    *ownerWindow,0,0,
+    ); XMapWindow(this.disp,this.handle); // create child win
+	
+
 }
 
 RawMouse::~RawMouse() {
-	XCloseDisplay(this.disp); // get rid of our redundant display handle
+	//XCloseDisplay(this.disp); // get rid of our redundant display handle
 	this.handle=0; // Nullify the window handle.
 }
 
@@ -263,4 +274,4 @@ float RawMouse_GetY(RawMouse* mouse)
 	return mouse->GetY();
 }
 
-
+}

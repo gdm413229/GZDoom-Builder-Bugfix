@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>G4_QtMainForm</class>
+ <widget class="QMainWindow" name="G4_QtMainForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GZDoom Builder Qt</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <widget class="QMenu" name="menuGrid_Configuration">
+     <property name="title">
+      <string>Grid Configuration</string>
+     </property>
+     <widget class="QMenu" name="menuGrid_Transformations">
+      <property name="title">
+       <string>Grid Transformations</string>
+      </property>
+      <addaction name="actionGridAlignToLine"/>
+      <addaction name="actionGridOriginToVertex"/>
+      <addaction name="actionResetGridXforms"/>
+     </widget>
+     <addaction name="actionCoarser_Grid"/>
+     <addaction name="actionFiner_Grid"/>
+     <addaction name="actionDynamic_Grid_Size"/>
+     <addaction name="menuGrid_Transformations"/>
+    </widget>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="actionPaste_Special"/>
+    <addaction name="separator"/>
+    <addaction name="actionMerge_Dragged_Verts_Only"/>
+    <addaction name="actionMerge_Dragged_Geometry"/>
+    <addaction name="actionReplace_with_Dragged_Geometry"/>
+    <addaction name="separator"/>
+    <addaction name="menuGrid_Configuration"/>
+    <addaction name="actionSnap_to_Grid"/>
+    <addaction name="actionSnap_to_Geometry"/>
+    <addaction name="actionSnap_Selection_to_Grid"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <widget class="QMenu" name="menu2D_View_Mode">
+     <property name="title">
+      <string>2D View Mode</string>
+     </property>
+     <widget class="QMenu" name="menuTextured">
+      <property name="title">
+       <string>Textured</string>
+      </property>
+      <addaction name="actionUse_Floor_Textures"/>
+      <addaction name="actionUse_Ceiling_Textures"/>
+     </widget>
+     <addaction name="actionWireframe"/>
+     <addaction name="actionFlat_Shaded"/>
+     <addaction name="menuTextured"/>
+     <addaction name="separator"/>
+     <addaction name="actionFull_Brightness"/>
+     <addaction name="separator"/>
+     <addaction name="actionShowGrid"/>
+    </widget>
+    <widget class="QMenu" name="menuVisual_Mode">
+     <property name="title">
+      <string>Visual Mode</string>
+     </property>
+     <widget class="QMenu" name="menuDynamic_Lights">
+      <property name="title">
+       <string>Dynamic Lights</string>
+      </property>
+      <addaction name="actionDynlightSwitch"/>
+      <addaction name="actionAnimate_Lights"/>
+     </widget>
+     <widget class="QMenu" name="menuModels">
+      <property name="title">
+       <string>Models</string>
+      </property>
+      <addaction name="actionModelsOff"/>
+      <addaction name="separator"/>
+      <addaction name="actionModelsSelThings"/>
+      <addaction name="actionModelsCurFilter"/>
+      <addaction name="separator"/>
+      <addaction name="actionModelsOn"/>
+     </widget>
+     <addaction name="menuDynamic_Lights"/>
+     <addaction name="menuModels"/>
+     <addaction name="separator"/>
+     <addaction name="actionFog"/>
+     <addaction name="actionSky"/>
+     <addaction name="separator"/>
+     <addaction name="actionEvent_Lines"/>
+     <addaction name="actionEditable_Vertices"/>
+    </widget>
+    <widget class="QMenu" name="menuMagnification_Minification">
+     <property name="title">
+      <string>Magnification/Minification</string>
+     </property>
+     <addaction name="actionZoomOctaSize"/>
+     <addaction name="actionZoomQuadSize"/>
+     <addaction name="actionZoomDoubleSize"/>
+     <addaction name="actionZoomActualSize"/>
+     <addaction name="actionZoomHalfSize"/>
+     <addaction name="actionZoomQuarterSize"/>
+     <addaction name="actionZoomTenthSize"/>
+     <addaction name="actionZoomSatelliteView"/>
+    </widget>
+    <addaction name="actionConfigure_Thing_Filters"/>
+    <addaction name="actionConfigure_Linedef_Colors"/>
+    <addaction name="separator"/>
+    <addaction name="menu2D_View_Mode"/>
+    <addaction name="menuVisual_Mode"/>
+    <addaction name="separator"/>
+    <addaction name="menuMagnification_Minification"/>
+   </widget>
+   <widget class="QMenu" name="modes_menu">
+    <property name="title">
+     <string>Mode</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuPrefabs">
+    <property name="title">
+     <string>Prefabs</string>
+    </property>
+    <addaction name="actionInsert_from_File"/>
+    <addaction name="actionInsert_Last"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_from_Selection"/>
+   </widget>
+   <widget class="QMenu" name="verts_menu">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Vertices</string>
+    </property>
+    <addaction name="actionPlace_Things"/>
+    <addaction name="verts_select_similar"/>
+   </widget>
+   <widget class="QMenu" name="lines_menu">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Linedefs</string>
+    </property>
+    <widget class="QMenu" name="menuSidedness_based_Selection">
+     <property name="title">
+      <string>Sidedness-based Selection</string>
+     </property>
+     <addaction name="actionSelect_Single_sided_Lines"/>
+     <addaction name="actionSelect_Double_sided_Lines"/>
+    </widget>
+    <widget class="QMenu" name="menuLinedef_Operations">
+     <property name="title">
+      <string>Linedef Operations</string>
+     </property>
+     <addaction name="actionFlip_Line_Normals"/>
+     <addaction name="actionAlign_Textures"/>
+     <addaction name="actionFlip_Sides"/>
+    </widget>
+    <addaction name="actionPlace_Things_2"/>
+    <addaction name="actionSynchronized_Thing_Editing"/>
+    <addaction name="separator"/>
+    <addaction name="menuSidedness_based_Selection"/>
+    <addaction name="menuLinedef_Operations"/>
+    <addaction name="separator"/>
+    <addaction name="actionCurve_Lines"/>
+    <addaction name="actionSplit_Lines"/>
+    <addaction name="actionUpdate_lightfog_flag"/>
+    <addaction name="actionAlign_Textures_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelect_Similar_2"/>
+   </widget>
+   <widget class="QMenu" name="sectors_menu">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Sectors</string>
+    </property>
+    <widget class="QMenu" name="menuSector_Operations">
+     <property name="title">
+      <string>Sector Operations</string>
+     </property>
+     <addaction name="actionJoin"/>
+     <addaction name="actionMerge"/>
+     <addaction name="separator"/>
+     <addaction name="actionFlip_Line_Normals_2"/>
+     <addaction name="actionAlign_Lines"/>
+    </widget>
+    <addaction name="actionPlace_Things_3"/>
+    <addaction name="actionSynchronized_Thing_Editing_2"/>
+    <addaction name="separator"/>
+    <addaction name="menuSector_Operations"/>
+    <addaction name="actionDoor_Factory"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelect_Similar_3"/>
+   </widget>
+   <widget class="QMenu" name="things_menu">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Things</string>
+    </property>
+    <addaction name="actionSelect_in_Sectors"/>
+    <addaction name="actionFilter_Selection"/>
+    <addaction name="separator"/>
+    <addaction name="actionAttach_to_Nearest_Linedef"/>
+    <addaction name="actionPoint_to_Cursor"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelect_Similar_4"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuFlush_and_Reload">
+     <property name="title">
+      <string>Flush and Reload</string>
+     </property>
+     <addaction name="actionReloadResources"/>
+     <addaction name="actionReloadMdlVox"/>
+     <addaction name="actionReloadGLDefs"/>
+    </widget>
+    <addaction name="menuFlush_and_Reload"/>
+    <addaction name="actionErrors_and_Warnings"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_GZDB_Qt"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="modes_menu"/>
+   <addaction name="menuPrefabs"/>
+   <addaction name="verts_menu"/>
+   <addaction name="lines_menu"/>
+   <addaction name="sectors_menu"/>
+   <addaction name="things_menu"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="gzdb_qt_statusbar"/>
+  <widget class="QToolBar" name="gzdb_qt_main_toolbar">
+   <property name="windowTitle">
+    <string>GZDB-Qt Main Toolbar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionAbout_GZDB_Qt">
+   <property name="text">
+    <string>About GZDB-Qt</string>
+   </property>
+  </action>
+  <action name="actionPlace_Things">
+   <property name="text">
+    <string>Place Things</string>
+   </property>
+  </action>
+  <action name="verts_select_similar">
+   <property name="text">
+    <string>Select Similar</string>
+   </property>
+  </action>
+  <action name="actionPlace_Things_2">
+   <property name="text">
+    <string>Place Things</string>
+   </property>
+  </action>
+  <action name="actionSynchronized_Thing_Editing">
+   <property name="text">
+    <string>Synchronized Thing Editing</string>
+   </property>
+  </action>
+  <action name="actionInsert_from_File">
+   <property name="text">
+    <string>Insert from File</string>
+   </property>
+  </action>
+  <action name="actionInsert_Last">
+   <property name="text">
+    <string>Insert Previous</string>
+   </property>
+  </action>
+  <action name="actionCreate_from_Selection">
+   <property name="text">
+    <string>Create from Selection</string>
+   </property>
+  </action>
+  <action name="actionConfigure_Thing_Filters">
+   <property name="text">
+    <string>Configure Thing Filters</string>
+   </property>
+  </action>
+  <action name="actionConfigure_Linedef_Colors">
+   <property name="text">
+    <string>Configure Linedef Colors</string>
+   </property>
+  </action>
+  <action name="actionWireframe">
+   <property name="text">
+    <string>Wireframe</string>
+   </property>
+  </action>
+  <action name="actionFlat_Shaded">
+   <property name="text">
+    <string>Flat Shaded</string>
+   </property>
+  </action>
+  <action name="actionUse_Floor_Textures">
+   <property name="text">
+    <string>Use Floor Textures</string>
+   </property>
+  </action>
+  <action name="actionUse_Ceiling_Textures">
+   <property name="text">
+    <string>Use Ceiling Textures</string>
+   </property>
+  </action>
+  <action name="actionFull_Brightness">
+   <property name="text">
+    <string>Full Brightness</string>
+   </property>
+  </action>
+  <action name="actionOff">
+   <property name="text">
+    <string>Off</string>
+   </property>
+  </action>
+  <action name="actionOn">
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionAnimate_Lights">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Animate Lights</string>
+   </property>
+   <property name="toolTip">
+    <string>Render animated dynamic lights? (turn on dynamic lights to see the animations!)</string>
+   </property>
+  </action>
+  <action name="actionModelsOff">
+   <property name="text">
+    <string>Sprites Only</string>
+   </property>
+   <property name="toolTip">
+    <string>Disables 3D model rendering, nuff said!</string>
+   </property>
+  </action>
+  <action name="actionModelsSelThings">
+   <property name="text">
+    <string>Selected Things Only</string>
+   </property>
+  </action>
+  <action name="actionModelsCurFilter">
+   <property name="text">
+    <string>Current Thing Filter Only</string>
+   </property>
+  </action>
+  <action name="actionModelsOn">
+   <property name="text">
+    <string>Full Model View</string>
+   </property>
+   <property name="toolTip">
+    <string>Enables 3D model rendering.</string>
+   </property>
+  </action>
+  <action name="actionFog">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fog</string>
+   </property>
+   <property name="toolTip">
+    <string>Render fog, haze and/or mist?</string>
+   </property>
+  </action>
+  <action name="actionSky">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sky</string>
+   </property>
+   <property name="toolTip">
+    <string>Render the sky sphere?</string>
+   </property>
+  </action>
+  <action name="actionEvent_Lines">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Event Lines</string>
+   </property>
+  </action>
+  <action name="actionEditable_Vertices">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Editable Vertices</string>
+   </property>
+   <property name="toolTip">
+    <string>Should vertices be displayed in Visual Mode?</string>
+   </property>
+  </action>
+  <action name="actionShowGrid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Grid</string>
+   </property>
+  </action>
+  <action name="actionReloadResources">
+   <property name="text">
+    <string>Resources</string>
+   </property>
+   <property name="toolTip">
+    <string>Flushes and reloads textures, flats and sprites.</string>
+   </property>
+  </action>
+  <action name="actionReloadMdlVox">
+   <property name="text">
+    <string>Models and Voxels</string>
+   </property>
+   <property name="toolTip">
+    <string>Flushes and reloads 3D models and voxels.</string>
+   </property>
+  </action>
+  <action name="actionReloadGLDefs">
+   <property name="text">
+    <string>GLDefs</string>
+   </property>
+   <property name="toolTip">
+    <string>Flushes and reloads the dynamic light information.</string>
+   </property>
+  </action>
+  <action name="actionErrors_and_Warnings">
+   <property name="text">
+    <string>Errors and Warnings</string>
+   </property>
+  </action>
+  <action name="actionDynlightSwitch">
+   <property name="text">
+    <string>D. Lights Illuminate Map</string>
+   </property>
+   <property name="toolTip">
+    <string>Turns dynamic lighting on</string>
+   </property>
+  </action>
+  <action name="actionSelect_Single_sided_Lines">
+   <property name="text">
+    <string>Only Single-sided Lines</string>
+   </property>
+  </action>
+  <action name="actionSelect_Double_sided_Lines">
+   <property name="text">
+    <string>Only Double-sided Lines</string>
+   </property>
+  </action>
+  <action name="actionFlip_Line_Normals">
+   <property name="text">
+    <string>Flip Line Normals</string>
+   </property>
+  </action>
+  <action name="actionAlign_Textures">
+   <property name="text">
+    <string>Align Lines</string>
+   </property>
+  </action>
+  <action name="actionFlip_Sides">
+   <property name="text">
+    <string>Flip Sides</string>
+   </property>
+  </action>
+  <action name="actionCurve_Lines">
+   <property name="text">
+    <string>Curve Lines</string>
+   </property>
+  </action>
+  <action name="actionSplit_Lines">
+   <property name="text">
+    <string>Split Lines</string>
+   </property>
+  </action>
+  <action name="actionUpdate_lightfog_flag">
+   <property name="text">
+    <string>Update 'lightfog' flag</string>
+   </property>
+  </action>
+  <action name="actionAlign_Textures_2">
+   <property name="text">
+    <string>Align Textures</string>
+   </property>
+  </action>
+  <action name="actionSelect_Similar_2">
+   <property name="text">
+    <string>Select Similar</string>
+   </property>
+  </action>
+  <action name="actionPlace_Things_3">
+   <property name="text">
+    <string>Place Things</string>
+   </property>
+  </action>
+  <action name="actionSynchronized_Thing_Editing_2">
+   <property name="text">
+    <string>Synchronized Thing Editing</string>
+   </property>
+  </action>
+  <action name="actionJoin">
+   <property name="text">
+    <string>Join</string>
+   </property>
+  </action>
+  <action name="actionMerge">
+   <property name="text">
+    <string>Merge</string>
+   </property>
+  </action>
+  <action name="actionDoor_Factory">
+   <property name="text">
+    <string>Door Factory</string>
+   </property>
+  </action>
+  <action name="actionFlip_Line_Normals_2">
+   <property name="text">
+    <string>Flip Line Normals</string>
+   </property>
+  </action>
+  <action name="actionAlign_Lines">
+   <property name="text">
+    <string>Align Lines</string>
+   </property>
+  </action>
+  <action name="actionSelect_Similar_3">
+   <property name="text">
+    <string>Select Similar</string>
+   </property>
+  </action>
+  <action name="actionSelect_in_Sectors">
+   <property name="text">
+    <string>Select Things in Selected Sectors</string>
+   </property>
+  </action>
+  <action name="actionFilter_Selection">
+   <property name="text">
+    <string>Filter Selection</string>
+   </property>
+  </action>
+  <action name="actionAttach_to_Nearest_Linedef">
+   <property name="text">
+    <string>Attach to Nearest Linedef</string>
+   </property>
+  </action>
+  <action name="actionPoint_to_Cursor">
+   <property name="text">
+    <string>Point to Cursor</string>
+   </property>
+  </action>
+  <action name="actionSelect_Similar_4">
+   <property name="text">
+    <string>Select Similar</string>
+   </property>
+  </action>
+  <action name="actionZoomOctaSize">
+   <property name="text">
+    <string>8:1</string>
+   </property>
+  </action>
+  <action name="actionZoomQuadSize">
+   <property name="text">
+    <string>4:1</string>
+   </property>
+  </action>
+  <action name="actionZoomDoubleSize">
+   <property name="text">
+    <string>2:1</string>
+   </property>
+  </action>
+  <action name="actionZoomActualSize">
+   <property name="text">
+    <string>1:1</string>
+   </property>
+  </action>
+  <action name="actionZoomHalfSize">
+   <property name="text">
+    <string>1:2</string>
+   </property>
+  </action>
+  <action name="actionZoomQuarterSize">
+   <property name="text">
+    <string>1:4</string>
+   </property>
+  </action>
+  <action name="actionZoomTenthSize">
+   <property name="text">
+    <string>1:10</string>
+   </property>
+  </action>
+  <action name="actionZoomSatelliteView">
+   <property name="text">
+    <string>1:20</string>
+   </property>
+   <property name="toolTip">
+    <string>The closest thing to satellite imagery in DOOM!</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionPaste_Special">
+   <property name="text">
+    <string>Paste Special</string>
+   </property>
+  </action>
+  <action name="actionMerge_Dragged_Verts_Only">
+   <property name="text">
+    <string>Merge Dragged Verts Only</string>
+   </property>
+  </action>
+  <action name="actionMerge_Dragged_Geometry">
+   <property name="text">
+    <string>Merge Dragged Geometry</string>
+   </property>
+  </action>
+  <action name="actionReplace_with_Dragged_Geometry">
+   <property name="text">
+    <string>Replace with Dragged Geometry</string>
+   </property>
+  </action>
+  <action name="actionSnap_to_Grid">
+   <property name="text">
+    <string>Snap to Grid</string>
+   </property>
+  </action>
+  <action name="actionSnap_to_Geometry">
+   <property name="text">
+    <string>Snap to Geometry</string>
+   </property>
+  </action>
+  <action name="actionSnap_Selection_to_Grid">
+   <property name="text">
+    <string>Snap Selection to Grid</string>
+   </property>
+  </action>
+  <action name="actionCoarser_Grid">
+   <property name="text">
+    <string>Coarser Grid</string>
+   </property>
+  </action>
+  <action name="actionFiner_Grid">
+   <property name="text">
+    <string>Finer Grid</string>
+   </property>
+  </action>
+  <action name="actionDynamic_Grid_Size">
+   <property name="text">
+    <string>Dynamic Grid Size</string>
+   </property>
+  </action>
+  <action name="actionGridAlignToLine">
+   <property name="text">
+    <string>Align to Selected Linedef</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Snaps the grid line to the nearest linedef.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;SELECTED LINEDEF MUST BE PERFECTLY HORIZONTAL OR VERTICAL!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionGridOriginToVertex">
+   <property name="text">
+    <string>Origin to Selected Vertex</string>
+   </property>
+   <property name="toolTip">
+    <string>Snaps the grid origin to the selected vertex.</string>
+   </property>
+  </action>
+  <action name="actionResetGridXforms">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+   <property name="toolTip">
+    <string>Snaps the grid origin back to map origin.</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

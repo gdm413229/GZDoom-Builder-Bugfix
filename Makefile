@@ -1,7 +1,10 @@
+USE_G413229_XLIB_RAWMOUSE ?= FALSE ## Set this to TRUE if you want to use the new Xlib RawMouse class
+USE_G413229_MWF_WORKAROUNDS ?= TRUE ## Set this to FALSE to not apply 413229's workarounds
+
 ## [gdm413229] for building those Visplane Explorer natives!
 
 VPO_NAME:= Build/libvpo_dll.so
-VPO_CXXFLAGS := -O3 -fPIC -DLINUX -I $(VPO_SRCPREFIX)
+VPO_CXXFLAGS := -O3 -fPIC -DLINUX -g3 -I $(VPO_SRCPREFIX)
 VPO_LDFLAGS := --shared -ldl
 VPO_SRCPREFIX :=Source/Plugins/vpo_dll
 VPO_INCLUDE := $(wildcard Source/Plugins/vpo_dll/*.h)
@@ -27,3 +30,4 @@ native:
 	g++ -O2 --shared -g3 -o Build/libBuilderNative.so -fPIC -I Source/Native Source/Native/*.cpp Source/Native/gl_load/*.c -lX11 -ldl
 
 .PHONY: vpo_natives
+.NOTPARALLEL: vpo_natives

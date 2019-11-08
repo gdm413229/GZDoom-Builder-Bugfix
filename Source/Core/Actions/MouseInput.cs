@@ -25,12 +25,29 @@ using System.Runtime.InteropServices;
 
 namespace CodeImp.DoomBuilder.Actions
 {
+
+    #if (G413229_USE_KLUDGEMOUSE) // not defined when using RawMouse
+
+    internal class GDM_KludgeMouse
+    {
+        // [gdm413229] Kludge mouse class
+    }
+
+    #endif
+
 	internal class MouseInput : IDisposable
 	{
 		#region ================== Variables
 
 		// Mouse input
+
+        #if (!G413229_USE_KLUDGEMOUSE) // Using RawMouse or KludgeMouse?
+
 		private RawMouse mouse;
+
+        #elif (G413229_USE_KLUDGEMOUSE)
+        private GDM_KludgeMouse mouse; // Temporary workaround for mouse look in Visual Mode
+        #endif
 		
 		#endregion
 
@@ -40,8 +57,11 @@ namespace CodeImp.DoomBuilder.Actions
 		public MouseInput(Control source)
 		{
 			// Start mouse input
+            #if (!G413229_USE_KLUDGEMOUSE) // Using RawMouse?
 			mouse = new RawMouse(source);
-
+            #elif (G413229_USE_KLUDGEMOUSE)
+            mouse = new GDM_KludgeMouse(source);
+            #endif
 			// We have no destructor
 			GC.SuppressFinalize(this);
 		}
@@ -118,6 +138,8 @@ namespace CodeImp.DoomBuilder.Actions
 
         internal IntPtr Handle;
 
+        #if (!G413229_USE_KLUDGEMOUSE) // These DllImports are not required for KludgeMouse
+
         [DllImport("BuilderNative.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern IntPtr RawMouse_New(IntPtr windowHandle);
 
@@ -129,5 +151,7 @@ namespace CodeImp.DoomBuilder.Actions
 
         [DllImport("BuilderNative.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern float RawMouse_GetY(IntPtr handle);
+
+        #endif
     }
 }

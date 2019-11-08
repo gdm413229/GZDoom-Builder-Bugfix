@@ -465,6 +465,13 @@ OpenGLContext::OpenGLContext(void* display, void* window) : disp((::Display*)dis
 		static OpenGLLoadFunctions loadFunctions;
 		ClearCurrent();
 	}
+
+	// make these display and window handles public for input grabbing's sake
+
+	#ifdef G413229_XLIB_RAWMOUSE
+	this.shared_disp = ; this.shared_win = ; // only for builds using my Xlib RawMouse class
+	#endif
+
 }
 
 OpenGLContext::~OpenGLContext()

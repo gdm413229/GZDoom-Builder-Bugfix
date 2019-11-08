@@ -50,13 +50,17 @@
 			columnHeader1.Text = "Map name";
 			columnHeader1.Width = -1;
 			// 
-			// mapslist
+			// mapslist [is a real haymaker on Mono/Linux without the workarounds!]
 			// 
 			this.mapslist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.mapslist.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             columnHeader1});
-			this.mapslist.FullRowSelect = true;
+			#if (!G413229_USE_WORKAROUNDS)
+			this.mapslist.FullRowSelect = true; // No workarounds due for Windows builds
+			#else
+			this.mapslist.FullRowSelect = false;
+			#endif
 			this.mapslist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.mapslist.HideSelection = false;
 			this.mapslist.LabelWrap = false;
@@ -67,9 +71,16 @@
 			this.mapslist.Size = new System.Drawing.Size(396, 125);
 			this.mapslist.Sorting = System.Windows.Forms.SortOrder.Ascending;
 			this.mapslist.TabIndex = 1;
+			#if (!G413229_USE_WORKAROUNDS)
 			this.mapslist.UseCompatibleStateImageBehavior = false;
+			#else
+			this.mapslist.UseCompatibleStateImageBehavior = true;
+			#endif
 			this.mapslist.View = System.Windows.Forms.View.List;
 			this.mapslist.DoubleClick += new System.EventHandler(this.mapslist_DoubleClick);
+			#if (G413229_USE_WORKAROUNDS)
+			this.mapslist.Scrollable=true; // Linux users now have a vertical scrollbar, not a horizontal scrollbar. [gdm413229's potential bug fix]
+			#endif
 			// 
 			// cancel
 			// 

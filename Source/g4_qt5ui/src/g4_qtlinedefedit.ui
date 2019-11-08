@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>g4_qtlinedefedit</class>
+ <widget class="QDialog" name="g4_qtlinedefedit">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>718</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>660</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>701</width>
+     <height>651</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="linedef_props">
+    <attribute name="title">
+     <string>Properties</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>191</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Linedef Flags</string>
+     </property>
+     <widget class="QCheckBox" name="checkBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Double Sided</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Upper Unpegged</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Lower Unpegged</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block EVERYTHING</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block players</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block monsters</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block floaters</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Impassable (vanilla DOOM)</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_9">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>20</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block projectiles</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_10">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>40</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block hitscan rays</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_11">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>60</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Block use actions</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_12">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>80</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Obscure monster LoS</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_13">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>100</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Jump-over railing</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_14">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>120</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Clip MidTex</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_15">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>140</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wrap MidTex</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_16">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>160</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Walkable MidTex</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_17">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>20</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Initially shown on automap</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_18">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>40</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Show as single-sided on map</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_19">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>60</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Invisible on automap</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_20">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>80</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Quarter opacity</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_21">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>100</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Translucent (deprecated)</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_22">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>120</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Monster activates</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_23">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>140</y>
+        <width>211</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sound zone boundary</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>190</y>
+       <width>691</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Settings</string>
+     </property>
+     <widget class="QComboBox" name="comboBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_2">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>20</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="alpha_spinner">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>20</y>
+        <width>111</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="wrapping">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::UpDownArrows</enum>
+      </property>
+      <property name="prefix">
+       <string>Opacity: </string>
+      </property>
+      <property name="maximum">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::DefaultStepType</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>20</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Render style:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>20</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Lock ID</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>370</y>
+       <width>691</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Activation</string>
+     </property>
+     <widget class="QCheckBox" name="checkBox_24">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Repeatable</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_25">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When player uses it</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_26">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When player treads on it</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_27">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When player bumps on it</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_28">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When monster uses it</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_29">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When monster treads on it</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_30">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>351</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When monster bumps on it</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_31">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>20</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Any crossing non-missile activates</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_32">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>40</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>When missile crosses this line</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_33">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>60</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>On projectile impact</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_34">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>80</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Switch height check</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_35">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>100</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pass use on</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_36">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>120</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Front sidedef only</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_37">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>140</y>
+        <width>311</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usable from back sidedef</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>240</y>
+       <width>691</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Action</string>
+     </property>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>55</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Special:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>61</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_3">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>10</y>
+        <width>421</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>10</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Presets</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_2">
+      <property name="geometry">
+       <rect>
+        <x>630</x>
+        <y>10</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Help</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>540</y>
+       <width>691</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Identification</string>
+     </property>
+     <widget class="QComboBox" name="tag_combobox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>20</y>
+        <width>461</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="new_tag_button">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>20</y>
+        <width>31</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>New</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="last_unused_tag_button">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>20</y>
+        <width>41</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Unused</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="reset_tag_button">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>20</y>
+        <width>41</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Reset</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="new_tag_button_2">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>40</y>
+        <width>31</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="new_tag_button_3">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>40</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="tag_holder_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>61</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag Holder</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="front_sidedef_props">
+    <attribute name="title">
+     <string>Front Side</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>621</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Has Front Sidedef?</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <widget class="QGroupBox" name="groupBox_7">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>10</y>
+        <width>201</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Upper Texture</string>
+      </property>
+      <widget class="QLineEdit" name="front_uppertex_nameholder">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+      </widget>
+      <widget class="QGraphicsView" name="front_uppertex_view">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>181</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Click me to open the texture browser.</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>210</y>
+        <width>201</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Middle Texture</string>
+      </property>
+      <widget class="QLineEdit" name="front_middletex_nameholder">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+      </widget>
+      <widget class="QGraphicsView" name="front_midtex_view">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>181</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Click me to open the texture browser.</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_9">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>410</y>
+        <width>201</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Lower Texture</string>
+      </property>
+      <widget class="QLineEdit" name="front_lowertex_nameholder">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+      </widget>
+      <widget class="QGraphicsView" name="front_lowertex_view">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>181</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Click me to open the texture browser.</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>461</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QSpinBox" name="frontside_secidx_spinner">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>10</y>
+         <width>231</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>65535</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>24</x>
+         <y>13</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sector index:</string>
+       </property>
+      </widget>
+      <widget class="QToolButton" name="front_custom_udmf_fields">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>70</y>
+         <width>121</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Custom Fields</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_38">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>40</y>
+         <width>131</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Absolute Shading</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Brightness:</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_10">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>461</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Texture Offsets</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>310</y>
+        <width>461</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Texture Scale</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_12">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>440</y>
+        <width>461</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Sidedef Flags</string>
+      </property>
+      <widget class="QCheckBox" name="frontside_flags_clipmidtex">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>441</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Clip MidTex</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="frontside_flags_wrapmidtex">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>441</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Wrap MidTex</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="frontside_flags_smooth">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>441</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Smooth Shading</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="frontside_flags_evenlux">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>441</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Even Shading</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="frontside_flags_spotless">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>441</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No Decals (always spotless!)</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="frontside_flags_lightfog">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>441</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Use sidedef brightness on fogged walls</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="back_sidedef_props">
+    <attribute name="title">
+     <string>Back Side</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="comment_editor_tab">
+    <attribute name="title">
+     <string>Comment</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="custom_fields_tab">
+    <attribute name="title">
+     <string>Custom Fields</string>
+    </attribute>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>g4_qtlinedefedit</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>g4_qtlinedefedit</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

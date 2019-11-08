@@ -71,8 +71,8 @@ namespace CodeImp.DoomBuilder.Windows
 				"Epic fail",
 				"At least it's not BSoD...",
 				"User Error. Please Replace User",
-				"Brought to you by MaxED!",
-				"GZDoom Builder proudly presents:",
+				"Brought to you by MaxED, ZZYZX and dpJudas!",
+				"GZDoom Builder GL proudly presents:",
 				"You aren't expected to understand this",
 				"Back to the drawing board...",
 				"I'm sorry... :(",
@@ -98,12 +98,12 @@ namespace CodeImp.DoomBuilder.Windows
 				"I'm good at writing bad code",
 				"$FUNNY_ERROR_CAPTION",
 				"In Soviet Russia, exception throws YOU!",
-				"...and then GZDB was the demons!",
+				"...and then GZDB-GL was the demons!",
 				"B U S T E D",
 				"Freeze mode enabled",
 				"You feel strange...",
 				"That doesn't seem to work",
-				"This function is only available in the retail version of GZDoom Builder",
+				"This function is only available in the retail version of GZDoom Builder GL",
 				"You picked up the Random Exception.",
 				"Pinky says that you're the new hope. Bear that in mind.",
 				"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -119,7 +119,7 @@ namespace CodeImp.DoomBuilder.Windows
 				"EVERYTHING IS LOST!",
 				"Your empty is full!",
 				"Let's see how far this infinite loop goes...",
-				"Windows 10 is here! RUN!",
+				"A wild Windows 10 update is here! RUN!",
 				"You really screwed up this time!",
 				"[WFDS]",
 				"[No]",
@@ -129,10 +129,22 @@ namespace CodeImp.DoomBuilder.Windows
 				"No error occurred",
 				"Hey! It looks like you're having an error!",
 				"What, what, what, what, what, what, what, what, what, what?",
-				"WARNING: PROGRAMMING BUG IN GZDB!",
+				"WARNING: PROGRAMMING BUG IN GZDB-GL!",
 				"Something happened",
 				"The Device is Error",
-                "Worship me, and I may yet be merciful... then again, maybe not."
+                "Worship me, and I may yet be merciful... then again, maybe not.",
+				"ＯＷ！　ＭＹ　ＭＡＰ！！！",
+				"All your work are belong to us!",
+				"ＴＨＥ　ＡＰＯＣＡＬＹＰＳＥ　ＢＥＧＩＮＳ！",
+				"ＯＨ　▄█▀ █━█ █ ▀█▀！",
+				"Burning sulfur rained from the heavens and burned your unsaved work up.",
+				"Your work is unexpectedly sent to /dev/null! :Ｃ",
+				"Your Common Language Runtime may be demonically possessed!",
+				"Segmentation fault",
+				"Illegal instruction",
+				"GZDoom Builder GL just SIGSEGV'd!",
+				"Deep into the source code we go!",
+				"Entering Map666: Where Editor Crashes Come From"
 			};
 
 			this.Text = titles[new Random().Next(0, titles.Length - 1)];
@@ -165,7 +177,7 @@ namespace CodeImp.DoomBuilder.Windows
 			}
 
             // Get GZDB version
-            result += "GZDB: R" + General.ThisAssembly.GetName().Version.Revision + Environment.NewLine;
+            result += "GZDB-GL: R" + General.ThisAssembly.GetName().Version.Revision + Environment.NewLine;
             result += "Platform: " + (Environment.Is64BitProcess ? "x64" : "x86") + Environment.NewLine + Environment.NewLine;
 
 			return result;
