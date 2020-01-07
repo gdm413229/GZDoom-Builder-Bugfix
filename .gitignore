@@ -4,10 +4,13 @@ obj
 bin
 /Build/Builder.xml
 /Build/Builder.exe
+/Build/XmBuilder.exe
 /Build/Refmanual.chm
 /.vs
 /Build/DevIL.dll
 /Build/Plugins/*.dll
+/Build/Plugins/*.so
+/Build/Plugins/*.so.*
 /Build/Builder.pdb
 /Build/Builder.exe.config
 /Build/Plugins/*.pdb
@@ -15,8 +18,10 @@ bin
 /Source/Plugins/VisplaneExplorer/Resources/*.exp
 /Source/Plugins/VisplaneExplorer/Resources/*.lib
 /Source/Plugins/VisplaneExplorer/Resources/*.pdb
+/Source/Plugins/*/Resources/XmIcons/old_winicons/*
 /Source/Plugins/vpo_dll/Debug
 /Source/Plugins/vpo_dll/*.user
+/Source/Plugins/BuilderModes/XmIcons/old_winicons/*
 /Build/BuilderNative.dll
 /Build/BuilderNative.exp
 /Build/BuilderNative.ilk
@@ -28,5 +33,7 @@ bin
 *.ipdb
 /Source/Plugins/vpo_dll/Release
 /Source/Core/*.user
+/Source/Core/Resources/XmIcons/old_winicns
 /Build/libBuilderNative.so
+/Build/libBuilderXm.so
 /Build/OpenGLDebug.log
