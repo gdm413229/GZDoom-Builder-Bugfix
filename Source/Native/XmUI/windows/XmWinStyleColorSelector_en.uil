@@ -1,0 +1,17 @@
+! English locale
+
+module XmWinStyleColSelectorDialog
+    names = case_sensitive
+
+value define_custom_cols_text : exported compound_string ('Define Custom Color');
+value red_text : exported compound_string ('Red:');
+value green_text : exported compound_string ('Grn:');
+value blue_text : exported compound_string ('Blu:');
+
+! The Windows colour selector uses the HSL colour model.
+
+value hue_text : exported compound_string ('Hue:');
+value saturation_text : exported compound_string ('Sat:');
+value luminance_text : exported compound_string ('Lum:');
+
+end module;

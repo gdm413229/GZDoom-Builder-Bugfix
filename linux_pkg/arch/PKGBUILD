@@ -1,0 +1,11 @@
+# Arch PKGBUILD for the Motif port of Ultimate Doom Builder
+
+# ＩＦ　ＩＴ　ＷＡＳＮ’Ｔ　ＦＯＲ　ＳＡＴＡＮ　ＨＡＶＩＮＧ　Ａ　ＭＡＳＳＩＶＥ　ＦＵＣＫ−ＦＥＳＴ
+# ＷＩＴＨ　ＥＶＥ
+
+pkgname=('udb-git')
+pkgrel=1
+pkgdesc=("A powerful editor for DOOM engine games, best stacked with *ZDoom.")
+arch=('x86_64' 'i686' 'ppc64le' '')
+depends=('openmotif')
+license=('GPLv3')

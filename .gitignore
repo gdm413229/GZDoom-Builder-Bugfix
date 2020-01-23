@@ -22,6 +22,14 @@ bin
 /Source/Plugins/vpo_dll/Debug
 /Source/Plugins/vpo_dll/*.user
 /Source/Plugins/BuilderModes/XmIcons/old_winicons/*
+/Source/Native/XmUI/windows/*.bip
+/Source/Native/XmUI/windows/*.bix
+/Source/Native/XmUI/windows/*.bix.BAK
+/Source/Native/XmUI/windows/*.bip.BAK
+/Source/Native/XmUI/windows/*.bil
+/Source/Native/XmUI/windows/*.uid
+/Source/Native/XmUI/windows/*~
+/Source/Native/XmUI/#*#
 /Build/BuilderNative.dll
 /Build/BuilderNative.exp
 /Build/BuilderNative.ilk
@@ -33,7 +41,27 @@ bin
 *.ipdb
 /Source/Plugins/vpo_dll/Release
 /Source/Core/*.user
+
+#Keep the .pm files, ignore the rest!
+
 /Source/Core/Resources/XmIcons/old_winicns
+/Source/Core/Resources/XmIcons/cde_icons
+/Source/Core/Resources/XmIcons/cde_xtraicns
+/Source/Core/Resources/XmIcons/*.xcf
+/Source/Core/Resources/XmIcons/*.xpm
+/Source/Core/Resources/XmIcons/*.png
+/Source/Core/Resources/XmIcons/#*#
+
+# Natives
+
 /Build/libBuilderNative.so
 /Build/libBuilderXm.so
+
+# Logs
+
 /Build/OpenGLDebug.log
+
+# Packages
+
+/linux_pkg/debian/*.deb
+/linux_pkg/rpm/*.rpm

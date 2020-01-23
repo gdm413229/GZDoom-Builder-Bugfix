@@ -1,0 +1,1 @@
+/* SWIG interface file for Xm */

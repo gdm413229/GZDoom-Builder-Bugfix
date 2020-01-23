@@ -11,9 +11,13 @@
  * derived from a quote from "The Exorcist" (1973) */
 
 #include "../motif_includes.hxx" // useful stuff for Motif!
+#define RETURN_COL 1
+#define SCRAP_COL 0
 
 /* Col selector dialogue creator */
 
 Window create_colselector_dialog() {}
+
+void 
 
 extern "C" {}

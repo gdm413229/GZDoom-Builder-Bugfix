@@ -1,0 +1,14 @@
+! libXm UIL spec for XmBuilder's color selector
+
+! I see Windows Update (the Win10 version) to be a steaming pile of :shit: that weighs in at a very blasphemous five hundred metric tons!
+
+module WinStyleColSelectorDialog
+    names = case_sensitive
+
+procedure
+    close_colselector();
+    close_colselector_and_return();
+
+object w32_style_col_selector : Xm
+
+end module;
